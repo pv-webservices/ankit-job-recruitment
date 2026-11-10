@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import FAQ from '../components/FAQ.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import CareerCTA from '../components/CareerCTA.astro';
+import { business, careerSupport } from '../data/site';
+---
+<Layout title="Career Opportunities & Job Placement" description="Explore career opportunities with Ankit Jobs & Staffing India. Register your details and enquire about job placement in Kolkata, Vizag and Odisha.">
+  <PageHero title="Your Next Job <em>Starts Here.</em>" crumb="Career" eyebrow="Career" text="Share your qualifications, preferred location and career interests, and speak with the team about current job opportunities." image="placement" imageAlt="A candidate discussing a role with a recruiter">
+    <div class="button-row stack-sm"><Button href="/candidate-registration/">Register Your Details</Button><Button href={business.whatsapp} external variant="whatsapp" leadingIcon="whatsapp" icon={false}>Enquire About Jobs</Button></div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="feature-panel" data-reveal>
+        <span class="icon-badge"><Icon name="briefcase" size={28}/></span>
+        <span class="status-pill">No vacancies published online yet</span>
+        <h2>Looking for Your Next Opportunity?</h2>
+        <p class="lead">Register your details so the team understands your profile, then call or WhatsApp to ask about current openings in Kolkata, Vizag and Odisha.</p>
+        <div class="button-row stack-sm"><Button href="/candidate-registration/">Register Your Details</Button><Button href={business.tel} variant="outline" leadingIcon="phone" icon={false}>Call <span class="num">{business.phone}</span></Button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-surface">
+    <div class="container split">
+      <div class="split-media" data-reveal>
+        <div class="frame"><img src="/images/jobseeker.webp" alt="A young job seeker checking opportunities on her phone" width="800" height="1200" loading="lazy" decoding="async" style="object-position:50% 22%"/></div>
+        <span class="frame-tag"><Icon name="sparkle" size={16}/>Your Career… Our Mission</span>
+      </div>
+      <div class="split-copy" data-reveal>
+        <span class="eyebrow">Career placement</span>
+        <h2>Connecting job seekers with the right opportunities.</h2>
+        <p>Every career move starts with a conversation. Tell us about your education, experience and the kind of work you are looking for, and understand the next steps before you apply.</p>
+        <ul class="check-list">{careerSupport.map((p) => <li><Icon name="check" size={16}/>{p}</li>)}</ul>
+        <div class="button-row" style="margin-top:24px"><Button href="/candidate-registration/">Apply Now</Button><a class="text-link" href="/how-it-works/">How it works <Icon name="arrow" size={16}/></a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container faq-page">
+      <SectionTitle eyebrow="A little more clarity" title="Before Your Next Step" text="Useful information for your career enquiry."/>
+      <FAQ limit={4}/>
+    </div>
+  </section>
+  <CareerCTA/>
+</Layout>

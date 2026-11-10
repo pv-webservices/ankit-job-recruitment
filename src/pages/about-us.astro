@@ -6,8 +6,8 @@ import Icon from '../components/Icon.astro';
 import CareerCTA from '../components/CareerCTA.astro';
 import { reasons } from '../data/site';
 ---
-<Layout title="About Us — People & Possibilities" description="Meet Ankit Jobs & Staffing India, a recruitment, job placement and staffing business serving job seekers and employers in Kolkata, Vizag and Odisha.">
-  <PageHero title="People. Possibilities. <em>A Way Forward.</em>" crumb="About Us" eyebrow="About Ankit Jobs & Staffing India" text="Bringing career enquiries and workforce needs into the same conversation." image="hero" imageAlt="Representative Indian office and industrial professionals"/>
+<Layout title="About Us — People & Possibilities" description="Meet Ankit Jobs & Staffing India, a recruitment and job placement business helping job seekers in Kolkata, Vizag and Odisha.">
+  <PageHero title="People. Possibilities. <em>A Way Forward.</em>" crumb="About Us" eyebrow="About Ankit Jobs & Staffing India" text="Helping job seekers take the next step in their careers." image="hero" imageAlt="Representative Indian office and industrial professionals"/>
 
   <section class="section">
     <div class="container split">
@@ -18,9 +18,9 @@ import { reasons } from '../data/site';
       <div class="split-copy" data-reveal>
         <span class="eyebrow">A connection that matters</span>
         <h2>The right conversation can open a new door.</h2>
-        <p>Ankit Jobs &amp; Staffing India is a recruitment, job placement and staffing business serving Kolkata, Vizag and Odisha.</p>
-        <p>For a job seeker, the next step begins with sharing career interests and qualifications. For an employer, it begins with a clear understanding of the people a business needs.</p>
-        <p>Our mission is to connect these conversations through recruitment and staffing assistance, with clear next steps for each enquiry.</p>
+        <p>Ankit Jobs &amp; Staffing India is a recruitment and job placement business serving candidates in Kolkata, Vizag and Odisha.</p>
+        <p>For a job seeker, the next step begins with sharing career interests, qualifications and a preferred location.</p>
+        <p>Our mission is to connect candidates with suitable opportunities through recruitment assistance, with clear next steps for each enquiry.</p>
         <div class="chip-row" style="margin-top:24px">{['Kolkata', 'Vizag', 'Odisha'].map((place) => <span class="chip"><Icon name="pin" size={16}/>{place}</span>)}</div>
       </div>
     </div>
@@ -28,10 +28,10 @@ import { reasons } from '../data/site';
 
   <section class="section bg-surface">
     <div class="container">
-      <div class="section-head center" data-reveal><span class="eyebrow">Who we work with</span><h2>Two Journeys. One Partner.</h2></div>
+      <div class="section-head center" data-reveal><span class="eyebrow">Who we work with</span><h2>Your Career. One Partner.</h2></div>
       <div class="grid-2">
         <article class="card lift" data-reveal><span class="icon-badge"><Icon name="briefcase" size={26}/></span><h3>For job seekers — take your next step with clarity.</h3><p>Explore the candidate form, understand the information requested and contact the team about current opportunities. Enquiries and registrations do not guarantee employment.</p><Button href="/candidate-registration/">Candidate Registration</Button></article>
-        <article class="card lift" data-reveal style="--delay:90ms"><span class="icon-badge navy"><Icon name="building" size={26}/></span><h3>For employers — start with the people you need.</h3><p>Discuss your role requirements, qualifications and locations with the team. Service availability and the scope of recruitment support are confirmed for each enquiry.</p><Button href="/for-employers/" variant="navy">For Employers</Button></article>
+        <article class="card lift" data-reveal style="--delay:90ms"><span class="icon-badge navy"><Icon name="search" size={26}/></span><h3>Explore careers — know what is available.</h3><p>Visit the Career page to learn how job placement works and call or WhatsApp the team to ask about current openings in your preferred location.</p><Button href="/career/" variant="navy">Explore Careers</Button></article>
       </div>
     </div>
   </section>

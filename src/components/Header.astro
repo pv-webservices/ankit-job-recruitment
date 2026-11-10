@@ -4,7 +4,7 @@ import Icon from './Icon.astro';
 import Button from './Button.astro';
 import { navigation, business } from '../data/site';
 const path = Astro.url.pathname;
-const isActive = (href: string) => path === href || (href === '/services/' && path.startsWith('/services/'));
+const isActive = (href: string) => path === href;
 const navItems = navigation.filter(([, href]) => href !== '/candidate-registration/');
 ---
 <a class="skip-link" href="#main">Skip to content</a>
@@ -39,7 +39,6 @@ const navItems = navigation.filter(([, href]) => href !== '/candidate-registrati
   </div>
   <nav class="drawer-nav" aria-label="Mobile navigation">
     {navigation.map(([label, href]) => <a href={href} class:list={{ active: isActive(href) }} aria-current={path === href ? 'page' : undefined}>{label}<Icon name="chevron" size={18}/></a>)}
-    <a href="/for-employers/" class:list={{ active: path === '/for-employers/' }}>For Employers<Icon name="chevron" size={18}/></a>
     <a href="/faq/" class:list={{ active: path === '/faq/' }}>FAQs<Icon name="chevron" size={18}/></a>
   </nav>
   <div class="drawer-cta">

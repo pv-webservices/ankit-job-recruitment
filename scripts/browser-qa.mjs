@@ -61,14 +61,8 @@ const base = "http://127.0.0.1:4323";
 const routes = [
   "/",
   "/about-us/",
-  "/services/",
-  "/services/manpower-recruitment/",
-  "/services/staffing-solutions/",
-  "/services/career-placement/",
-  "/services/bulk-hiring/",
-  "/job-openings/",
+  "/career/",
   "/candidate-registration/",
-  "/for-employers/",
   "/how-it-works/",
   "/contact-us/",
   "/faq/",
@@ -248,7 +242,7 @@ try {
   for (const [route, filename] of [
     ["/", "home"],
     ["/candidate-registration/", "registration"],
-    ["/services/", "services"],
+    ["/career/", "career"],
     ["/contact-us/", "contact"],
   ]) {
     for (const [width, label] of [
