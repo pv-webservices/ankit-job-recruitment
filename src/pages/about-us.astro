@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import CareerCTA from '../components/CareerCTA.astro';
+import { reasons } from '../data/site';
+---
+<Layout title="About Us — People & Possibilities" description="Meet Ankit Jobs & Staffing India, a recruitment, job placement and staffing business serving job seekers and employers in Kolkata, Vizag and Odisha.">
+  <PageHero title="People. Possibilities. <em>A Way Forward.</em>" crumb="About Us" eyebrow="About Ankit Jobs & Staffing India" text="Bringing career enquiries and workforce needs into the same conversation." image="hero" imageAlt="Representative Indian office and industrial professionals"/>
+
+  <section class="section">
+    <div class="container split">
+      <div class="split-media" data-reveal>
+        <div class="frame"><img src="/images/placement.webp" alt="A candidate and recruiter having a career conversation" width="960" height="640" loading="lazy" decoding="async"/></div>
+        <span class="frame-tag"><Icon name="sparkle" size={16}/>Your Career… Our Mission</span>
+      </div>
+      <div class="split-copy" data-reveal>
+        <span class="eyebrow">A connection that matters</span>
+        <h2>The right conversation can open a new door.</h2>
+        <p>Ankit Jobs &amp; Staffing India is a recruitment, job placement and staffing business serving Kolkata, Vizag and Odisha.</p>
+        <p>For a job seeker, the next step begins with sharing career interests and qualifications. For an employer, it begins with a clear understanding of the people a business needs.</p>
+        <p>Our mission is to connect these conversations through recruitment and staffing assistance, with clear next steps for each enquiry.</p>
+        <div class="chip-row" style="margin-top:24px">{['Kolkata', 'Vizag', 'Odisha'].map((place) => <span class="chip"><Icon name="pin" size={16}/>{place}</span>)}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-surface">
+    <div class="container">
+      <div class="section-head center" data-reveal><span class="eyebrow">Who we work with</span><h2>Two Journeys. One Partner.</h2></div>
+      <div class="grid-2">
+        <article class="card lift" data-reveal><span class="icon-badge"><Icon name="briefcase" size={26}/></span><h3>For job seekers — take your next step with clarity.</h3><p>Explore the candidate form, understand the information requested and contact the team about current opportunities. Enquiries and registrations do not guarantee employment.</p><Button href="/candidate-registration/">Candidate Registration</Button></article>
+        <article class="card lift" data-reveal style="--delay:90ms"><span class="icon-badge navy"><Icon name="building" size={26}/></span><h3>For employers — start with the people you need.</h3><p>Discuss your role requirements, qualifications and locations with the team. Service availability and the scope of recruitment support are confirmed for each enquiry.</p><Button href="/for-employers/" variant="navy">For Employers</Button></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section why-section on-dark">
+    <div class="container reasons-wrap">
+      <div data-reveal><span class="eyebrow">What guides us</span><h2 style="color:#fff">Why Choose <span>Us?</span></h2><p class="lead" style="margin-top:16px">People at the centre. Your next step in focus.</p></div>
+      <div class="reasons-grid">{reasons.map((r, i) => <div class="reason" data-reveal style={`--delay:${i * 70}ms`}><span class="icon-badge"><Icon name={r.icon} size={24}/></span><h3>{r.title}</h3><p>{r.text}</p></div>)}</div>
+    </div>
+  </section>
+  <CareerCTA/>
+</Layout>

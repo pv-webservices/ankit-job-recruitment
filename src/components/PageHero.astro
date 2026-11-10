@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+interface Props { title: string; text: string; eyebrow?: string; image?: string; imageAlt?: string; crumb?: string; }
+const { title, text, eyebrow = 'Ankit Jobs & Staffing India', image, imageAlt = 'Representative recruitment and workforce professionals', crumb } = Astro.props;
+---
+<section class="page-hero">
+  <div class:list={['container page-hero-inner', { 'no-media': !image }]}>
+    <div class="hero-anim on-dark">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><Icon name="chevron" size={13}/><span aria-current="page">{crumb ?? title}</span></nav>
+      <span class="eyebrow">{eyebrow}</span>
+      <h1 set:html={title}/>
+      <p class="lead">{text}</p>
+      <slot/>
+    </div>
+    {image && <div class="page-hero-visual"><div class="frame"><img src={`/images/${image}.webp`} alt={imageAlt} width="960" height="640" fetchpriority="high" decoding="async"/></div></div>}
+  </div>
+</section>

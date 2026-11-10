@@ -1,0 +1,80 @@
+/* Archivo's ampersand is very stylised; borrow IBM Plex Sans's for headings. */
+@font-face {
+  font-family: "Display Amp";
+  src: url("@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 700;
+  font-display: swap;
+  unicode-range: U+0026;
+}
+/* Ankit Jobs & Staffing India — design tokens.
+   Navy + gold brand from the original logo, evolved with a cooler ice neutral
+   and a red accent taken from the logo's stars. */
+:root {
+  --navy-950: #020c22;
+  --navy-900: #03142e;
+  --navy-800: #061b4c;
+  --navy-700: #0b2a6e;
+  --blue-600: #064a9b;
+  --blue-500: #0874c9;
+  --blue-100: #dceafb;
+  --gold-300: #ffd75e;
+  --gold-400: #ffc928;
+  --gold-500: #e5a900;
+  --gold-600: #8f6800;
+  --gold-50: #fff8e1;
+  --red-500: #c8102e;
+  --ice: #eef5fd;
+  --surface: #f6f8fc;
+  --white: #ffffff;
+  --ink: #13213b;
+  --ink-2: #33415c;
+  --muted: #5a6a82;
+  --line: #dde5f0;
+  --line-strong: #c3cfe0;
+  --success: #12805c;
+  --danger: #c0262d;
+  --whatsapp: #25d366;
+  --whatsapp-dark: #128c4b;
+
+  --font-display: "Display Amp", "Archivo Variable", "Archivo", "Segoe UI", Arial, sans-serif;
+  --font-body: "IBM Plex Sans Variable", "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+  --font-brand: Georgia, "Times New Roman", serif;
+
+  --fs-hero: clamp(2.3rem, 1.25rem + 3.4vw, 3.65rem);
+  --fs-h1: clamp(2.1rem, 1.3rem + 3.2vw, 3.6rem);
+  --fs-h2: clamp(1.75rem, 1.2rem + 2.1vw, 2.85rem);
+  --fs-h3: clamp(1.15rem, 1.02rem + 0.5vw, 1.4rem);
+  --fs-lead: clamp(1.02rem, 0.96rem + 0.3vw, 1.2rem);
+  --fs-body: 1rem;
+  --fs-sm: 0.9rem;
+  --fs-xs: 0.78rem;
+
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgb(6 27 76 / 0.06), 0 2px 8px rgb(6 27 76 / 0.06);
+  --shadow-md: 0 6px 18px rgb(6 27 76 / 0.08), 0 18px 40px rgb(6 27 76 / 0.08);
+  --shadow-lg: 0 24px 60px rgb(3 20 46 / 0.18);
+  --shadow-gold: 0 10px 24px rgb(229 169 0 / 0.28);
+
+  --gutter: clamp(16px, 4.5vw, 72px);
+  --container: 1440px;
+  --container-narrow: 980px;
+  --section-y: clamp(64px, 8.5vw, 124px);
+  --header-h: 84px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur: 320ms;
+  --dur-slow: 700ms;
+}
+
+@media (max-width: 899px) {
+  :root {
+    --header-h: 68px;
+  }
+}

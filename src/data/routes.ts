@@ -1,0 +1,15 @@
+export const publicRoutes = [
+  "/",
+  "/about-us/",
+  "/services/",
+  "/services/manpower-recruitment/",
+  "/services/staffing-solutions/",
+  "/services/career-placement/",
+  "/services/bulk-hiring/",
+  "/job-openings/",
+  "/candidate-registration/",
+  "/for-employers/",
+  "/how-it-works/",
+  "/contact-us/",
+  "/faq/",
+];

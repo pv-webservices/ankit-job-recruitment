@@ -1,0 +1,16 @@
+---
+interface Field { name: string; label: string; type: 'text' | 'tel' | 'email' | 'select' | 'date'; placeholder?: string; autocomplete?: string; options?: string[]; readonly?: boolean; optional?: boolean; }
+interface Props { field: Field; id: string; }
+const { field, id } = Astro.props;
+const controlId = `${id}-${field.name}`;
+const maxLength = field.type === 'tel' ? 20 : field.type === 'email' ? 254 : 100;
+---
+<div class:list={['form-field', `field-${field.name}`]}>
+  <label for={controlId}>{field.label}{!field.optional && !field.readonly && <span class="req" aria-hidden="true"> *</span>}{field.optional && <small> (optional)</small>}</label>
+  <div class="field-control">
+    {field.type === 'select'
+      ? <select id={controlId} name={field.name} required={!field.optional} disabled={field.name === 'district'} aria-describedby={`${controlId}-error`}><option value="">{field.placeholder}</option>{field.options?.map((option) => <option value={option}>{option}</option>)}</select>
+      : <input id={controlId} name={field.name} type={field.type} placeholder={field.placeholder} autocomplete={field.autocomplete} maxlength={maxLength} required={!field.optional && !field.readonly} readonly={field.readonly} inputmode={field.type === 'tel' ? 'tel' : undefined} aria-describedby={`${controlId}-error`}/>}
+    <span id={`${controlId}-error`} class="field-error"></span>
+  </div>
+</div>

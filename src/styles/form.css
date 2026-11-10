@@ -1,0 +1,264 @@
+/* ---------- Candidate registration form ---------- */
+.registration-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+}
+.registration-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: clamp(22px, 3vw, 32px) clamp(20px, 3.4vw, 40px);
+  background:
+    radial-gradient(80% 140% at 100% 0%, rgb(8 116 201 / 0.45), transparent 60%),
+    var(--navy-800);
+  color: rgb(255 255 255 / 0.8);
+}
+.registration-heading h2 {
+  color: var(--white);
+  font-size: clamp(1.35rem, 1.1rem + 0.9vw, 1.8rem);
+}
+.registration-heading p {
+  margin: 4px 0 0;
+  font-size: var(--fs-sm);
+}
+.registration-body {
+  padding: clamp(20px, 3.4vw, 40px);
+}
+.registration-body > .notice {
+  margin-bottom: 24px;
+}
+.candidate-form {
+  display: grid;
+  gap: 22px;
+}
+.required-note {
+  margin: 0;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.required-note span,
+.form-field label .req {
+  color: var(--danger);
+}
+.form-group {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.form-group legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: var(--navy-800);
+}
+.form-group legend .num {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: var(--gold-50);
+  color: var(--gold-600);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.form-group legend::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.form-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 18px;
+}
+.form-field {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+.form-field label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.form-field label small {
+  font-weight: 400;
+  color: var(--muted);
+}
+.field-control {
+  display: grid;
+  gap: 6px;
+}
+.candidate-form input:not([type="checkbox"]),
+.candidate-form select {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 16px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 14px;
+  background-color: var(--white);
+  color: var(--ink);
+  font-size: 16px; /* prevents iOS zoom */
+  line-height: 1.3;
+  transition:
+    border-color var(--dur-fast),
+    box-shadow var(--dur-fast),
+    background-color var(--dur-fast);
+}
+.candidate-form input::placeholder {
+  color: #8c99ad;
+}
+.candidate-form input:hover,
+.candidate-form select:hover:not(:disabled) {
+  border-color: var(--blue-500);
+}
+.candidate-form input:focus,
+.candidate-form select:focus {
+  outline: none;
+  border-color: var(--blue-600);
+  box-shadow: 0 0 0 4px rgb(8 116 201 / 0.16);
+}
+.candidate-form input[readonly] {
+  background: var(--surface);
+  color: var(--navy-800);
+  font-weight: 600;
+  cursor: default;
+}
+/* Themed select: custom navy chevron in a gold-tinted pill */
+.candidate-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 54px;
+  cursor: pointer;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23061b4c' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"),
+    linear-gradient(var(--gold-50), var(--gold-50));
+  background-repeat: no-repeat;
+  background-position:
+    right 17px center,
+    right 8px center;
+  background-size:
+    14px 14px,
+    34px 34px;
+  text-overflow: ellipsis;
+}
+.candidate-form select:focus {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23061b4c' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"),
+    linear-gradient(var(--gold-400), var(--gold-400));
+}
+.candidate-form select:invalid,
+.candidate-form select option[value=""] {
+  color: #8c99ad;
+}
+.candidate-form select option {
+  color: var(--ink);
+  background: var(--white);
+  font-weight: 500;
+}
+.candidate-form select option:checked {
+  background: var(--ice);
+  color: var(--navy-800);
+}
+.candidate-form select:disabled {
+  background-color: var(--surface);
+  color: #9aa6b8;
+  border-style: dashed;
+  cursor: not-allowed;
+}
+.candidate-form input[type="date"] {
+  min-height: 52px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.candidate-form input[type="date"]::-webkit-calendar-picker-indicator {
+  padding: 6px;
+  border-radius: 8px;
+  background-color: var(--gold-50);
+  cursor: pointer;
+}
+.candidate-form [aria-invalid="true"] {
+  border-color: var(--danger) !important;
+  background-color: #fff7f7 !important;
+}
+.field-error {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--danger);
+  line-height: 1.35;
+}
+.field-error:empty {
+  display: none;
+}
+.consent-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--surface);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.consent-row input {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin: 1px 0 0;
+  accent-color: var(--navy-800);
+  cursor: pointer;
+}
+.form-actions {
+  display: grid;
+  gap: 12px;
+}
+.form-submit {
+  width: 100%;
+  min-height: 58px;
+  font-size: 1.05rem;
+}
+.form-status:not(:empty) {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--ice);
+  color: var(--navy-800);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+.form-status:focus {
+  outline: 2px solid var(--blue-500);
+  outline-offset: 2px;
+}
+.form-assistance {
+  margin: 0;
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.form-assistance a {
+  font-weight: 700;
+  white-space: nowrap;
+}
+@media (max-width: 599px) {
+  .form-fields {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .registration-heading .icon-badge {
+    width: 46px;
+    height: 46px;
+  }
+}

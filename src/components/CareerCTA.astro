@@ -1,0 +1,18 @@
+---
+import Button from './Button.astro';
+import { business } from '../data/site';
+---
+<section class="cta-band" aria-labelledby="career-title">
+  <div class="cta-band-media"><img src="/images/bulk-hiring.webp" alt="A group of office and industrial professionals looking ahead to their next opportunity" width="960" height="640" loading="lazy" decoding="async"/></div>
+  <div class="container cta-band-inner">
+    <div class="cta-band-copy on-dark" data-reveal>
+      <span class="eyebrow">Your next chapter</span>
+      <h2 id="career-title">Ready to Build <span>Your Career?</span></h2>
+      <p>Register today and take the next step towards a better job opportunity with Ankit Jobs &amp; Staffing India.</p>
+      <div class="button-row stack-sm">
+        <Button href="/candidate-registration/">Apply Now</Button>
+        <Button href={business.tel} variant="ghost-light" leadingIcon="phone" icon={false}>Call <span class="num">{business.phone}</span></Button>
+      </div>
+    </div>
+  </div>
+</section>

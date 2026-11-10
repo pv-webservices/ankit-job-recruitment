@@ -1,0 +1,12 @@
+---
+import Icon from './Icon.astro';
+import { steps } from '../data/site';
+---
+<ol class="timeline">
+  {steps.map((step, i) => (
+    <li data-reveal style={`--delay:${i * 80}ms`}>
+      <div class="step-marker"><Icon name={step.icon} size={28}/><span class="step-number num">{String(i + 1).padStart(2, '0')}</span></div>
+      <div class="step-body"><h3>{step.title}</h3><p>{step.text}</p></div>
+    </li>
+  ))}
+</ol>

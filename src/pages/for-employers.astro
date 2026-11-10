@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import ServiceCards from '../components/ServiceCards.astro';
+import Icon from '../components/Icon.astro';
+import { business } from '../data/site';
+---
+<Layout title="For Employers — Recruitment & Workforce Enquiries" description="Discuss manpower recruitment, staffing and multiple-vacancy hiring requirements with Ankit Jobs & Staffing India in Kolkata, Vizag and Odisha.">
+  <PageHero title="Find the Right Talent <em>for Your Business.</em>" crumb="For Employers" eyebrow="For employers" text="Discuss your recruitment and staffing requirements with Ankit Jobs & Staffing India." image="employer" imageAlt="A business owner shaking hands with a recruitment consultant">
+    <div class="button-row stack-sm"><Button href={business.employerWhatsapp} external variant="whatsapp" leadingIcon="whatsapp" icon={false}>Discuss Hiring Requirements</Button><Button href={business.tel} variant="ghost-light" leadingIcon="phone" icon={false}>Call Our Team</Button></div>
+  </PageHero>
+  <section class="section">
+    <div class="container">
+      <SectionTitle eyebrow="Start with people" title="Every Team Starts with People" text="Start with a clear conversation about your business needs." centered/>
+      <div class="grid-2">
+        <article class="card lift" data-reveal><span class="icon-badge"><Icon name="clipboard" size={26}/></span><h3>Tell us what your team needs.</h3><p>Outline the roles, qualifications, location and scale of your hiring requirement. These details help the team understand what support you are seeking.</p><p>Use a general enquiry. Candidate CVs and private personal details should not be shared through this website’s WhatsApp link.</p></article>
+        <article class="card lift" data-reveal style="--delay:90ms"><span class="icon-badge navy"><Icon name="handshake" size={26}/></span><h3>Agree the next steps together.</h3><p>The proposed process begins with discussing your requirement, reviewing available support and confirming a suitable approach.</p><p>Availability, fees, timeframes and contractual arrangements must be confirmed directly with the team. No hiring result or timeline is guaranteed.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="section bg-surface pattern-dots">
+    <div class="container">
+      <SectionTitle eyebrow="Recruitment support" title="Explore Our Services" text="Service scope is discussed and confirmed for each requirement."/>
+      <ServiceCards/>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="feature-panel" data-reveal>
+        <span class="icon-badge navy"><Icon name="building" size={26}/></span>
+        <h2>Let’s Talk About Your Next Team.</h2>
+        <p class="lead">Speak with Ankit Rai about your recruitment or staffing enquiry.</p>
+        <div class="button-row stack-sm"><Button href={business.employerWhatsapp} external variant="whatsapp" leadingIcon="whatsapp" icon={false}>Discuss Hiring Requirements</Button><Button href={business.tel} variant="outline" leadingIcon="phone" icon={false}>Call <span class="num">{business.phone}</span></Button></div>
+      </div>
+    </div>
+  </section>
+</Layout>

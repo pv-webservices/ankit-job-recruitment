@@ -1,0 +1,8 @@
+---
+import Icon from './Icon.astro';
+type Variant = 'primary' | 'navy' | 'outline' | 'ghost-light' | 'whatsapp';
+interface Props { href: string; variant?: Variant; secondary?: boolean; external?: boolean; icon?: string | false; leadingIcon?: string; size?: 'sm'; block?: boolean; class?: string; }
+const { href, variant, secondary = false, external = false, icon = 'arrow', leadingIcon, size, block = false, class: className = '' } = Astro.props;
+const resolved: Variant = variant ?? (secondary ? 'outline' : 'primary');
+---
+<a href={href} class:list={['button', `button-${resolved}`, className, { 'button-sm': size === 'sm', 'button-block': block }]} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>{leadingIcon && <Icon name={leadingIcon} size={20}/>}<slot/>{icon && <Icon name={icon} size={19}/>}</a>

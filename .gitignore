@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+output/
+.playwright-mcp/
+*.log
+assets-src/generated/

@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CandidateForm from '../components/CandidateForm.astro';
+import Icon from '../components/Icon.astro';
+import { business } from '../data/site';
+---
+<Layout title="Candidate Registration" description="Register your details with Ankit Jobs & Staffing India. Review the candidate registration requirements; online submission will be available after secure processing and privacy approval.">
+  <PageHero title="Your Next Step <em>Starts Here.</em>" crumb="Candidate Registration" eyebrow="Candidate registration" text="Fill in your personal, contact, education and location details. Secure online submission is being prepared."/>
+  <section class="section bg-ice">
+    <div class="container register-wrap">
+      <aside class="register-aside" data-reveal>
+        <span class="eyebrow">Your career. Your possibilities.</span>
+        <h2>A Few Details. <span class="text-blue">A New Beginning.</span></h2>
+        <ul class="check-list">
+          <li><Icon name="check" size={16}/>Keep your contact details accurate.</li>
+          <li><Icon name="check" size={16}/>Select your state before your district.</li>
+          <li><Icon name="check" size={16}/>The alternative mobile number is optional.</li>
+          <li><Icon name="check" size={16}/>Age is calculated automatically from your date of birth.</li>
+        </ul>
+        <div class="notice"><Icon name="lock" size={18}/><p><strong>Your details deserve care.</strong>This form currently checks fields only. It does not send or save your details. Please do not send your completed form, family details or sensitive documents through a general WhatsApp enquiry.</p></div>
+        <div class="button-row" style="margin-top:18px"><a class="text-link" href="/privacy-policy/">Read the privacy notice <Icon name="arrow" size={16}/></a><a class="text-link" href={business.tel}>Need help? Call <span class="num">{business.phone}</span></a></div>
+        <div class="register-photo"><div class="frame"><img src="/images/jobseeker.webp" alt="A young job seeker filling in details on her smartphone" width="800" height="1200" loading="lazy" decoding="async"/></div></div>
+      </aside>
+      <CandidateForm id="candidate-registration"/>
+    </div>
+  </section>
+</Layout>

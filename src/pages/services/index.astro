@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import CareerCTA from '../../components/CareerCTA.astro';
+import { services } from '../../data/site';
+---
+<Layout title="Recruitment & Staffing Services" description="Explore manpower recruitment, staffing solutions, career placement and bulk hiring support from Ankit Jobs & Staffing India in Kolkata, Vizag and Odisha.">
+  <PageHero title="People Power <em>Every Possibility.</em>" crumb="Services" eyebrow="Our recruitment & staffing services" text="Explore support for career enquiries and workforce requirements. Talk to the team to confirm the service scope available for your needs."/>
+  <section class="section">
+    <div class="container service-rows">
+      {services.map((service, i) => (
+        <article class="service-row" data-reveal>
+          <div class="service-row-media"><div class="frame"><img src={`/images/${service.image}.webp`} alt={service.alt} width="960" height="640" loading={i === 0 ? 'eager' : 'lazy'} decoding="async"/></div><span class="frame-tag"><Icon name={service.icon} size={16}/>{service.audience}</span></div>
+          <div>
+            <span class="service-index num">0{i + 1} — {service.audience}</span>
+            <h2>{service.title}</h2>
+            <p class="lead">{service.description}</p>
+            <ul class="check-list">{service.points.map((p) => <li><Icon name="check" size={16}/>{p}</li>)}</ul>
+            <Button href={`/services/${service.slug}/`} variant={i % 2 ? 'navy' : 'primary'}>Explore {service.title}</Button>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <CareerCTA/>
+</Layout>

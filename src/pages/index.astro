@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import Button from '../components/Button.astro';
+import CandidateForm from '../components/CandidateForm.astro';
+import ServiceCards from '../components/ServiceCards.astro';
+import Process from '../components/Process.astro';
+import FAQ from '../components/FAQ.astro';
+import CareerCTA from '../components/CareerCTA.astro';
+import { business, services, reasons, locations } from '../data/site';
+const marquee = [...services.map((s) => s.title), 'Kolkata', 'Vizag', 'Odisha', 'Your Career… Our Mission'];
+const heroAlt = 'Three young Indian professionals — an office executive, a customer-service executive and a site technician — on a Kolkata riverfront with Howrah Bridge behind them';
+---
+<Layout title="Recruitment & Staffing in Kolkata, Vizag & Odisha" description="Ankit Jobs & Staffing India connects job seekers with career opportunities and helps employers find the right people — recruitment, staffing, career placement and bulk hiring support in Kolkata, Vizag and Odisha." preloadImage={{ href: '/images/hero-kolkata.webp', srcset: '/images/hero-kolkata-960.webp 960w, /images/hero-kolkata.webp 1536w', sizes: '(max-width: 899px) 100vw, 64vw' }}>
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-media" aria-hidden="true">
+      <img data-parallax src="/images/hero-kolkata.webp" srcset="/images/hero-kolkata-960.webp 960w, /images/hero-kolkata.webp 1536w" sizes="64vw" alt="" width="1536" height="1024" fetchpriority="high" decoding="async"/>
+    </div>
+    <div class="container hero-inner">
+      <div class="hero-copy hero-anim">
+        <span class="hero-kicker"><b><Icon name="sparkle" size={15}/></b>Recruitment · Staffing · Career Placement</span>
+        <h1 id="hero-title">Connecting Talents with <em>Right Opportunities</em></h1>
+        <p class="hero-lead">A recruitment and staffing partner helping job seekers build careers and supporting employers with the right talent — across Kolkata, Vizag and Odisha.</p>
+        <div class="button-row">
+          <Button href="#register">Apply for a Job</Button>
+          <Button href="/for-employers/" variant="ghost-light">Hire Talent</Button>
+        </div>
+        <div class="hero-mobile-media">
+          <img src="/images/hero-kolkata-960.webp" srcset="/images/hero-kolkata-960.webp 960w, /images/hero-kolkata.webp 1536w" sizes="100vw" alt={heroAlt} width="960" height="640" decoding="async"/>
+          <span class="frame-tag"><Icon name="pin" size={16}/>Kolkata · Vizag · Odisha</span>
+        </div>
+        <ul class="hero-trust">
+          <li><Icon name="users" size={20}/>For job seekers &amp; employers</li>
+          <li><Icon name="pin" size={20}/>Kolkata · Vizag · Odisha</li>
+          <li><Icon name="phone" size={20}/><a href={business.tel} style="color:inherit;text-decoration:none"><span class="num">{business.phone}</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="hero-badge" aria-hidden="true">
+      <img src="/images/logo-badge.webp" alt="" width="54" height="54"/>
+      <div><strong>Your Career… Our Mission</strong><span>Ankit Jobs &amp; Staffing India</span></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-label="Our services and locations">
+    <div class="marquee-track">
+      <ul>{marquee.map((item) => <li>{item}</li>)}</ul>
+      <ul aria-hidden="true">{marquee.map((item) => <li>{item}</li>)}</ul>
+    </div>
+  </div>
+
+  <!-- AUDIENCE PATHS -->
+  <section class="section" aria-labelledby="paths-title">
+    <div class="container">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">How can we help?</span>
+        <h2 id="paths-title">One Partner for Careers <span class="text-blue">&amp;</span> Hiring</h2>
+        <p class="lead">Whether you are looking for your next job or the next person for your team, start with a clear conversation.</p>
+      </div>
+      <div class="paths">
+        <article class="path-card" data-reveal>
+          <div class="path-media"><img src="/images/jobseeker.webp" alt="A young Indian job seeker smiling while checking job opportunities on her phone" width="800" height="1200" loading="lazy" decoding="async" style="object-position:50% 22%"/><span class="path-label">For job seekers</span></div>
+          <div class="path-body">
+            <h3>Looking for your next job?</h3>
+            <p>Share your qualifications, preferred location and career interests, and enquire about suitable opportunities.</p>
+            <ul class="check-list">{services[2].points.map((p) => <li><Icon name="check" size={16}/>{p}</li>)}</ul>
+            <div class="button-row stack-sm"><Button href="#register">Register Your Details</Button><Button href="/job-openings/" variant="outline">Job Openings</Button></div>
+          </div>
+        </article>
+        <article class="path-card dark on-dark" data-reveal style="--delay:90ms">
+          <div class="path-media"><img src="/images/employer-720.webp" srcset="/images/employer-720.webp 720w, /images/employer.webp 1200w" sizes="(max-width: 859px) 100vw, 45vw" alt="A business owner shaking hands with a recruitment consultant across a desk" width="720" height="480" loading="lazy" decoding="async"/><span class="path-label">For employers</span></div>
+          <div class="path-body">
+            <h3>Hiring for your business?</h3>
+            <p>Discuss the roles, qualifications, locations and scale of your hiring requirement with the team.</p>
+            <ul class="check-list">{services[0].points.map((p) => <li><Icon name="check" size={16}/>{p}</li>)}</ul>
+            <div class="button-row stack-sm"><Button href={business.employerWhatsapp} external variant="whatsapp" leadingIcon="whatsapp" icon={false}>Discuss Hiring</Button><Button href="/for-employers/" variant="ghost-light">For Employers</Button></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section bg-surface pattern-dots" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-head split" data-reveal>
+        <div>
+          <span class="eyebrow">What we do</span>
+          <h2 id="services-title">Our Recruitment &amp; Staffing Services</h2>
+          <p class="lead">End-to-end hiring and workforce support for candidates and employers.</p>
+        </div>
+        <a class="text-link" href="/services/">View all services <Icon name="arrow" size={18}/></a>
+      </div>
+      <ServiceCards/>
+      <p class="section-note">Availability and scope of each service are confirmed with the team for every enquiry.</p>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" aria-labelledby="process-title">
+    <div class="container process-wrap">
+      <div class="process-intro" data-reveal>
+        <span class="eyebrow">How it works</span>
+        <h2 id="process-title">A Simple, Transparent Path to <span class="text-blue">Your Next Job</span></h2>
+        <p class="lead" style="margin-top:16px">A proposed journey from your first enquiry to your next opportunity.</p>
+        <div class="button-row" style="margin-top:26px"><Button href="#register">Start with Step 1</Button><a class="text-link" href="/how-it-works/">See the details <Icon name="arrow" size={18}/></a></div>
+        <div class="frame"><img src="/images/placement.webp" alt="A recruiter discussing a CV with a candidate" width="960" height="640" loading="lazy" decoding="async"/></div>
+      </div>
+      <Process/>
+    </div>
+  </section>
+
+  <!-- REGISTRATION -->
+  <section class="section bg-ice" id="register" aria-labelledby="register-title">
+    <div class="container register-wrap">
+      <div class="register-aside" data-reveal>
+        <span class="eyebrow">Candidate registration</span>
+        <h2 id="register-title">A Few Details. <span class="text-blue">A New Beginning.</span></h2>
+        <p class="lead" style="margin-top:16px">Tell us about yourself, your education and your preferred location so the team can understand your career enquiry.</p>
+        <ul class="check-list">
+          <li><Icon name="check" size={16}/>Keep your mobile number and email accurate.</li>
+          <li><Icon name="check" size={16}/>Select your state first, then your district.</li>
+          <li><Icon name="check" size={16}/>Your age is calculated automatically from your date of birth.</li>
+        </ul>
+        <div class="register-photo">
+          <div class="frame"><img src="/images/jobseeker.webp" alt="A young job seeker filling in details on her smartphone" width="800" height="1200" loading="lazy" decoding="async"/></div>
+          <div class="register-float"><span class="icon-badge" style="width:44px;height:44px;border-radius:12px"><Icon name="phone" size={20}/></span><span>Questions? Call <a class="num" href={business.tel}>{business.phone}</a></span></div>
+        </div>
+      </div>
+      <div data-reveal style="--delay:90ms"><CandidateForm id="registration"/></div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section class="section" aria-labelledby="locations-title">
+    <div class="container">
+      <div class="section-head split" data-reveal>
+        <div>
+          <span class="eyebrow">Where we operate</span>
+          <h2 id="locations-title">Serving Kolkata, Vizag &amp; Odisha</h2>
+          <p class="lead">Recruitment, job placement and staffing enquiries across our three service locations.</p>
+        </div>
+        <a class="text-link" href="/contact-us/">Contact the team <Icon name="arrow" size={18}/></a>
+      </div>
+      <div class="locations-grid rail">
+        {locations.map((loc, i) => (
+          <article class="location-card" data-reveal style={`--delay:${i * 90}ms`}>
+            <img src={`/images/${loc.image}.webp`} alt={loc.alt} width="720" height="1080" loading="lazy" decoding="async"/>
+            <span class="loc-index"><Icon name="pin" size={14}/><span class="num">0{i + 1}</span></span>
+            <h3>{loc.name}</h3>
+            <p>{loc.text}</p>
+          </article>
+        ))}
+      </div>
+      <span class="rail-hint">Swipe <Icon name="arrow" size={16}/></span>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="section why-section on-dark" aria-labelledby="why-title">
+    <div class="container reasons-wrap">
+      <div data-reveal>
+        <span class="eyebrow">Why choose us</span>
+        <h2 id="why-title" style="color:#fff">Why Choose <span>Us?</span></h2>
+        <p class="lead" style="margin-top:16px">A reliable, people-first recruitment partner — keeping your next step in focus.</p>
+        <div class="button-row stack-sm" style="margin-top:28px"><Button href="/about-us/" variant="ghost-light">About Us</Button></div>
+      </div>
+      <div class="reasons-grid">
+        {reasons.map((r, i) => (
+          <div class="reason" data-reveal style={`--delay:${i * 70}ms`}>
+            <span class="icon-badge"><Icon name={r.icon} size={24}/></span>
+            <h3>{r.title}</h3>
+            <p>{r.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section bg-surface" aria-labelledby="faq-title">
+    <div class="container faq-wrap">
+      <div data-reveal>
+        <span class="eyebrow">Good questions</span>
+        <h2 id="faq-title">Frequently Asked Questions</h2>
+        <p class="lead" style="margin-top:16px">Quick answers to help you make an informed enquiry.</p>
+        <div class="help-card on-dark">
+          <h3>Still have a question?</h3>
+          <p>Speak with Ankit Rai directly.</p>
+          <div class="button-row stack-sm"><Button href={business.tel} leadingIcon="phone" icon={false} size="sm">Call Now</Button><Button href={business.whatsapp} external variant="whatsapp" leadingIcon="whatsapp" icon={false} size="sm">WhatsApp</Button></div>
+        </div>
+      </div>
+      <div>
+        <FAQ limit={5}/>
+        <a class="text-link" href="/faq/" style="margin-top:14px">View all FAQs <Icon name="arrow" size={18}/></a>
+      </div>
+    </div>
+  </section>
+
+  <CareerCTA/>
+</Layout>

@@ -1,0 +1,8 @@
+---
+interface Props { footer?: boolean; drawer?: boolean; }
+const { footer = false, drawer = false } = Astro.props;
+---
+<a class:list={['brand', { 'brand-footer': footer }]} href="/" aria-label="Ankit Jobs & Staffing India — Home">
+  <img src="/images/logo-badge.webp" srcset="/images/logo-badge.webp 1x, /images/logo-badge-2x.webp 2x" alt="" width="62" height="62" loading={footer ? 'lazy' : 'eager'} decoding="async"/>
+  <span class="brand-copy"><span class="brand-name">Ankit Jobs &amp; <b>Staffing India.</b></span>{!drawer && <span class="brand-tag">Recruitment ! Staffing</span>}</span>
+</a>

@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import FAQ from '../components/FAQ.astro';
+import Button from '../components/Button.astro';
+import { business } from '../data/site';
+---
+<Layout title="Frequently Asked Questions" description="Answers about candidate registration, employer enquiries, WhatsApp contact, service locations and job openings at Ankit Jobs & Staffing India.">
+  <PageHero title="A Little Clarity for <em>Your Next Step.</em>" crumb="FAQs" eyebrow="Frequently asked questions" text="Straightforward answers to help you make an informed enquiry."/>
+  <section class="section bg-surface">
+    <div class="container faq-page">
+      <div data-reveal>
+        <span class="eyebrow">Good questions. Clear answers.</span>
+        <h2>How Can We Help?</h2>
+        <p class="lead" style="margin:14px 0 24px">Can’t find the information you need? Contact the team to confirm the details of your enquiry.</p>
+        <div class="button-row stack-sm"><Button href="/contact-us/">Talk to Our Team</Button><Button href={business.whatsapp} external variant="whatsapp" leadingIcon="whatsapp" icon={false}>WhatsApp</Button></div>
+      </div>
+      <FAQ/>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import { business } from '../data/site';
+---
+<Layout title="Contact Ankit Rai — Recruitment & Staffing Enquiries" description="Contact Ankit Rai at Ankit Jobs & Staffing India. Call +91 8348623389, email or make a general WhatsApp enquiry. Service locations: Kolkata, Vizag and Odisha.">
+  <PageHero title="A Conversation Can Change <em>What’s Next.</em>" crumb="Contact Us" eyebrow="Contact us" text="Whether you are exploring your next role or looking for people for your business, start here."/>
+  <section class="section">
+    <div class="container split" style="align-items:start">
+      <div data-reveal>
+        <span class="eyebrow">Let’s connect</span>
+        <h2>We’re Here for Your Next Step.</h2>
+        <p class="lead" style="margin:14px 0 28px">Choose the way that works best for your general enquiry.</p>
+        <div class="contact-actions">
+          <a href={business.tel} class="contact-action"><span class="icon-badge"><Icon name="phone" size={24}/></span><span><strong class="num">{business.phone}</strong><small>Call Ankit Jobs &amp; Staffing India</small></span><Icon name="arrow" size={20}/></a>
+          <a href={business.whatsapp} target="_blank" rel="noopener noreferrer" class="contact-action whatsapp"><span class="icon-badge"><Icon name="whatsapp" size={26}/></span><span><strong>WhatsApp Enquiry</strong><small>Start a general conversation</small></span><Icon name="arrow" size={20}/></a>
+          <a href={`mailto:${business.email}`} class="contact-action"><span class="icon-badge navy"><Icon name="mail" size={24}/></span><span><strong>{business.email}</strong><small>Business email</small></span><Icon name="arrow" size={20}/></a>
+        </div>
+      </div>
+      <aside class="contact-panel on-dark" data-reveal style="--delay:90ms">
+        <span class="eyebrow">People. Possibilities. Progress.</span>
+        <h2>Your Career… <span class="text-gold">Our Mission.</span></h2>
+        <p>Recruitment, job placement and staffing enquiries for our service locations.</p>
+        <div class="chip-row" style="margin-top:18px">{['Kolkata', 'Vizag', 'Odisha'].map((place) => <span class="chip"><Icon name="pin" size={15}/>{place}</span>)}</div>
+        <div class="contact-person"><img src="/images/logo-badge.webp" alt="" width="58" height="58" loading="lazy"/><div><small>Your contact person</small><strong>Ankit Rai</strong></div></div>
+        <p>Please keep WhatsApp and email enquiries general. Do not send completed candidate forms, family details or sensitive documents through these links.</p>
+        <a class="text-link" href="/for-employers/">Looking to hire? Start here <Icon name="arrow" size={17}/></a>
+      </aside>
+    </div>
+  </section>
+  <section class="section-tight bg-surface">
+    <div class="container grid-2">
+      <div class="card lift" data-reveal><span class="icon-badge"><Icon name="briefcase" size={24}/></span><h3>Exploring your next opportunity?</h3><p>Review the candidate form and registration notice.</p><Button href="/candidate-registration/">Candidate Registration</Button></div>
+      <div class="card lift" data-reveal style="--delay:90ms"><span class="icon-badge navy"><Icon name="building" size={24}/></span><h3>Looking for recruitment support?</h3><p>Explore services and discuss your requirements.</p><Button href="/services/" variant="navy">View Our Services</Button></div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,8 @@
+/* Without JavaScript the drawer cannot open, so show the navigation inline. */
+@media (max-width: 1023px) {
+  body .site-header { position: static; }
+  body .header-inner { flex-wrap: wrap; height: auto; padding-block: 14px; gap: 12px; }
+  body .menu-toggle { display: none; }
+  body .main-nav { display: grid; width: 100%; grid-template-columns: 1fr 1fr; margin: 0; }
+  body .main-nav a { text-align: center; background: #eef5fd; }
+}

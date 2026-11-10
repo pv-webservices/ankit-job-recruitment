@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import FAQ from '../components/FAQ.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import { business } from '../data/site';
+---
+<Layout title="Job Openings & Career Enquiries" description="Enquire about current career opportunities with Ankit Jobs & Staffing India. Find candidate registration information and contact the team for vacancy details.">
+  <PageHero title="Make Space for Your <em>Next Chapter.</em>" crumb="Job Openings" eyebrow="Job openings" text="A new opportunity starts with knowing where to look. Register your details and speak with the team about current vacancies." image="bulk-hiring" imageAlt="Office and industrial professionals at a workplace"/>
+  <section class="section">
+    <div class="container">
+      <div class="feature-panel" data-reveal>
+        <span class="icon-badge"><Icon name="briefcase" size={28}/></span>
+        <span class="status-pill">No vacancies published online yet</span>
+        <h2>Looking for Your Next Opportunity?</h2>
+        <p class="lead">Explore candidate registration so you know the details needed for your enquiry, then call or WhatsApp the team to ask about current openings.</p>
+        <div class="button-row stack-sm"><Button href="/candidate-registration/">Register Your Details</Button><Button href={business.whatsapp} external variant="whatsapp" leadingIcon="whatsapp" icon={false}>Enquire About Jobs</Button></div>
+      </div>
+    </div>
+  </section>
+  <section class="section bg-surface">
+    <div class="container faq-page">
+      <SectionTitle eyebrow="A little more clarity" title="Before Your Next Step" text="Useful information for your career enquiry."/>
+      <FAQ limit={4}/>
+    </div>
+  </section>
+</Layout>
