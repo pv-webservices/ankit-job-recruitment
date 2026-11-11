@@ -152,3 +152,12 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* About: keep the photo beside the long copy on desktop only. On narrower
+   screens the layout stacks, so a sticky photo would cover the text. */
+@media (min-width: 900px) {
+  .about-media {
+    position: sticky;
+    top: calc(var(--header-h) + 84px);
+  }
+}
