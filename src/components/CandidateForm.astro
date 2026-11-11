@@ -4,11 +4,12 @@ import FormField from './FormField.astro';
 import { qualifications, genders } from '../lib/registration.mjs';
 import districts from '../data/india-districts.json';
 import { business } from '../data/site';
+import { UPLOAD_ACCEPT } from '../lib/upload.mjs';
 interface Props { id?: string; headingLevel?: 'h2' | 'h3'; }
 const { id = 'registration', headingLevel = 'h2' } = Astro.props;
 const Heading = headingLevel;
-type FieldType = 'text' | 'tel' | 'email' | 'select' | 'date';
-interface Field { name: string; label: string; type: FieldType; placeholder?: string; autocomplete?: string; options?: string[]; readonly?: boolean; optional?: boolean; }
+type FieldType = 'text' | 'tel' | 'email' | 'select' | 'date' | 'file';
+interface Field { name: string; label: string; type: FieldType; placeholder?: string; autocomplete?: string; options?: string[]; readonly?: boolean; optional?: boolean; wide?: boolean; accept?: string; hint?: string; }
 const fields: Field[] = [
   { name: 'name', label: 'Full name', type: 'text', placeholder: 'Enter your full name', autocomplete: 'name' },
   { name: 'fatherName', label: 'Father’s name', type: 'text', placeholder: 'Enter father’s name', autocomplete: 'off' },
@@ -21,12 +22,14 @@ const fields: Field[] = [
   { name: 'gender', label: 'Gender', type: 'select', options: genders, placeholder: 'Select gender' },
   { name: 'state', label: 'State / UT', type: 'select', options: Object.keys(districts).sort(), placeholder: 'Select state / UT' },
   { name: 'district', label: 'District', type: 'select', options: [], placeholder: 'Select state first' },
+  { name: 'resume', label: 'Upload resume / CV', type: 'file', accept: UPLOAD_ACCEPT, hint: 'PDF, Word, JPG or PNG · max 5 MB', optional: true, wide: true },
   { name: 'alternativeMobile', label: 'Alternative mobile', type: 'tel', placeholder: 'Optional mobile number', autocomplete: 'off', optional: true },
 ];
 const groups = [
   { title: 'Personal information', names: ['name', 'fatherName', 'motherName', 'gender', 'dob', 'age'] },
   { title: 'Contact information', names: ['mobile', 'alternativeMobile', 'email'] },
   { title: 'Education & location', names: ['qualification', 'state', 'district'] },
+  { title: 'Resume', names: ['resume'] },
 ];
 const byName = (name: string): Field => fields.find((field) => field.name === name)!;
 ---
@@ -36,23 +39,24 @@ const byName = (name: string): Field => fields.find((field) => field.name === na
     <div><Heading>Candidate Registration</Heading><p>Register your details to enquire about suitable job opportunities.</p></div>
   </div>
   <div class="registration-body">
-    <div class="notice"><Icon name="lock" size={18}/><p><strong>Online submission is not yet available.</strong>Details entered here are checked in your browser only — they are not sent or saved.</p></div>
-    <!-- method=dialog prevents native navigation if the script fails; there is no data endpoint yet. -->
+    <div class="notice"><Icon name="lock" size={18}/><p><strong>Your details are handled with care.</strong>Submissions go directly to the Ankit Jobs &amp; Staffing India team and are used only to process your job application.</p></div>
+    <!-- method=dialog prevents native navigation if the script fails; submission happens via fetch. -->
     <form class="candidate-form" method="dialog" novalidate data-candidate-form>
       <p class="required-note"><span>*</span> Required fields</p>
+      <div class="form-honeypot" aria-hidden="true"><label>Leave this empty<input name="website" type="text" tabindex="-1" autocomplete="off"/></label></div>
       {groups.map((group, i) => (
         <fieldset class="form-group">
           <legend><span class="num">{i + 1}</span>{group.title}</legend>
           <div class="form-fields">{group.names.map((name) => <FormField field={byName(name)} id={id}/>)}</div>
         </fieldset>
       ))}
-      <div class="consent-row"><input id={`${id}-consent`} name="consent" type="checkbox" required aria-describedby={`${id}-consent-error`}/><label for={`${id}-consent`}>I have read the <a href="/privacy-policy/">privacy notice</a> and understand that online submission is not yet available.</label></div>
+      <div class="consent-row"><input id={`${id}-consent`} name="consent" type="checkbox" required aria-describedby={`${id}-consent-error`}/><label for={`${id}-consent`}>I agree that Ankit Jobs &amp; Staffing India may store and use my details and uploaded resume to process my application, as described in the <a href="/privacy-policy/">privacy notice</a>.</label></div>
       <span id={`${id}-consent-error`} class="field-error"></span>
       <div class="form-actions">
         <button class="button button-primary form-submit" type="submit" disabled><Icon name="send" size={20}/> Submit Registration</button>
         <div class="form-status" role="status" aria-live="polite" tabindex="-1"></div>
       </div>
-      <noscript><p class="form-status">JavaScript is needed to check these fields. Online registration is not available. Please call <a href={business.tel}>{business.phone}</a> for a general enquiry.</p></noscript>
+      <noscript><p class="form-status">JavaScript is needed to submit this form. Please call <a href={business.tel}>{business.phone}</a> for a general enquiry.</p></noscript>
     </form>
     <p class="form-assistance" style="margin-top:18px">Need assistance? <a href={business.tel}>Call <span class="num">{business.phone}</span></a></p>
   </div>

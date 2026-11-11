@@ -48,211 +48,6 @@
   }
 }
 
-/* ---------- Header ---------- */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 60;
-  background: rgb(255 255 255 / 0.96);
-  border-bottom: 1px solid transparent;
-  transition:
-    box-shadow var(--dur) var(--ease-out),
-    border-color var(--dur) var(--ease-out);
-}
-@supports (backdrop-filter: blur(1px)) {
-  .site-header {
-    background: rgb(255 255 255 / 0.88);
-    backdrop-filter: saturate(1.4) blur(14px);
-  }
-}
-.site-header.is-scrolled {
-  border-color: var(--line);
-  box-shadow: 0 8px 30px rgb(6 27 76 / 0.08);
-}
-.header-inner {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  height: var(--header-h);
-}
-
-/* Brand lockup: original logo badge + serif wordmark from the logo */
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-  color: var(--navy-800);
-  text-decoration: none;
-}
-.brand img {
-  width: 62px;
-  height: 62px;
-  flex-shrink: 0;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgb(3 20 46 / 0.22));
-  transition: transform var(--dur) var(--ease-out);
-}
-.brand:hover img {
-  transform: rotate(-6deg) scale(1.04);
-}
-.brand-copy {
-  display: grid;
-  gap: 2px;
-  font-family: var(--font-brand);
-  line-height: 1.08;
-}
-.brand-name {
-  font-size: 1.32rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--navy-800);
-}
-.brand-name b {
-  color: var(--red-500);
-  font-weight: 700;
-}
-.brand-tag {
-  justify-self: start;
-  margin-top: 4px;
-  padding: 3px 10px 4px;
-  border-radius: var(--r-pill);
-  background: var(--gold-400);
-  color: var(--navy-900);
-  font-family: var(--font-body);
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  line-height: 1.3;
-}
-.brand-footer .brand-name {
-  color: var(--white);
-}
-.brand-footer .brand-name b {
-  color: var(--gold-400);
-}
-
-.main-nav {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-left: auto;
-}
-.main-nav a {
-  position: relative;
-  padding: 10px 14px;
-  border-radius: var(--r-pill);
-  color: var(--ink-2);
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: none;
-  transition:
-    color var(--dur-fast),
-    background var(--dur-fast);
-}
-.main-nav a::after {
-  content: "";
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 5px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--gold-500);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--dur) var(--ease-out);
-}
-.main-nav a:hover {
-  color: var(--navy-800);
-}
-.main-nav a:hover::after,
-.main-nav a.active::after {
-  transform: scaleX(1);
-}
-.main-nav a.active {
-  color: var(--navy-800);
-}
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.header-call {
-  display: inline-grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  color: var(--navy-800);
-  transition:
-    background var(--dur-fast),
-    color var(--dur-fast),
-    border-color var(--dur-fast);
-}
-.header-call:hover {
-  background: var(--navy-800);
-  border-color: var(--navy-800);
-  color: var(--gold-400);
-}
-.menu-toggle {
-  display: none;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  margin-left: auto;
-  border: 0;
-  border-radius: 14px;
-  background: var(--navy-800);
-  color: var(--white);
-  transition: background var(--dur-fast);
-}
-.menu-toggle:hover {
-  background: var(--navy-700);
-}
-@media (max-width: 1199px) {
-  .main-nav a {
-    padding-inline: 10px;
-    font-size: 0.9rem;
-  }
-  .main-nav a::after {
-    left: 10px;
-    right: 10px;
-  }
-  .header-call {
-    display: none;
-  }
-}
-@media (max-width: 1023px) {
-  .main-nav,
-  .header-actions {
-    display: none;
-  }
-  .menu-toggle {
-    display: inline-grid;
-  }
-}
-@media (max-width: 899px) {
-  .brand img {
-    width: 50px;
-    height: 50px;
-  }
-  .brand-name {
-    font-size: 1.08rem;
-  }
-  .brand-tag {
-    font-size: 0.58rem;
-    padding: 2px 8px 3px;
-  }
-}
-@media (max-width: 359px) {
-  .brand-tag {
-    display: none;
-  }
-}
-
 /* ---------- Mobile drawer (right side; lives outside the sticky header so
    position:fixed is always relative to the viewport, even after scrolling) */
 .drawer-backdrop {
@@ -303,17 +98,6 @@
   gap: 12px;
   padding: 14px 18px;
   border-bottom: 1px solid rgb(255 255 255 / 0.1);
-}
-.drawer-head .brand img {
-  width: 46px;
-  height: 46px;
-}
-.drawer-head .brand-name {
-  font-size: 1rem;
-  color: var(--white);
-}
-.drawer-head .brand-name b {
-  color: var(--gold-400);
 }
 .drawer-close {
   display: grid;
@@ -380,7 +164,7 @@
   color: var(--gold-400);
   flex-shrink: 0;
 }
-@media (min-width: 1024px) {
+@media (min-width: 1100px) {
   .drawer,
   .drawer-backdrop {
     display: none;
@@ -626,24 +410,6 @@ body:has(main .cta-band:last-child) .footer-cta {
   min-width: 0;
   gap: 10px;
 }
-.drawer-head .brand-name {
-  font-size: 0.98rem;
-}
 .drawer-close {
   flex-shrink: 0;
-}
-
-/* Small phones: stack the wordmark like the original logo lockup */
-@media (max-width: 459px) {
-  .header-inner .brand-name b,
-  .drawer-head .brand-name b {
-    display: block;
-  }
-  .header-inner .brand-name {
-    font-size: 1.12rem;
-    line-height: 1.1;
-  }
-  .header-inner {
-    gap: 12px;
-  }
 }

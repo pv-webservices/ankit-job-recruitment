@@ -2,30 +2,35 @@
 import Brand from './Brand.astro';
 import Icon from './Icon.astro';
 import Button from './Button.astro';
-import { business, navigation } from '../data/site';
+import { business, navigation, services } from '../data/site';
 ---
 <footer class="site-footer">
   <div class="container footer-cta">
     <h2>Your next opportunity starts here — <span>let’s talk.</span></h2>
     <div class="button-row">
-      <Button href="/candidate-registration/">Register Now</Button>
+      <Button href="/candidate-zone/">Register Now</Button>
       <Button href={business.whatsapp} external variant="whatsapp" leadingIcon="whatsapp" icon={false}>WhatsApp Us</Button>
     </div>
   </div>
   <div class="container footer-grid">
     <div class="footer-brand">
       <Brand footer/>
-      <p>Recruitment and job placement support for job seekers.</p>
+      <p>Trusted manpower, recruitment and staffing partner for employers and job seekers.</p>
       <div class="chip-row on-dark">{['Kolkata', 'Vizag', 'Odisha'].map(place => <span class="chip"><Icon name="pin" size={15}/>{place}</span>)}</div>
-      <em>Your Career… Our Mission</em>
+      <em>Your Career, Our Mission</em>
+      <div class="footer-social">
+        <a class="social-btn facebook" href={business.facebook} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook"><Icon name="facebook" size={20}/></a>
+        <a class="social-btn call" href={business.tel} aria-label={`Call ${business.phone}`}><Icon name="phone" size={19}/></a>
+        <a class="social-btn whatsapp" href={business.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp us"><Icon name="whatsapp" size={21}/></a>
+      </div>
     </div>
     <div>
       <h2>Quick Links</h2>
       <ul class="footer-links">{navigation.map(([label, href]) => <li><a href={href}><Icon name="chevron" size={14}/>{label}</a></li>)}<li><a href="/faq/"><Icon name="chevron" size={14}/>FAQs</a></li></ul>
     </div>
     <div>
-      <h2>For Candidates</h2>
-      <ul class="footer-links"><li><a href="/career/"><Icon name="chevron" size={14}/>Career</a></li><li><a href="/candidate-registration/"><Icon name="chevron" size={14}/>Candidate Registration</a></li><li><a href="/how-it-works/"><Icon name="chevron" size={14}/>How It Works</a></li></ul>
+      <h2>Our Services</h2>
+      <ul class="footer-links">{services.map((s) => <li><a href={`/our-services/#${s.slug}`}><Icon name="chevron" size={14}/>{s.title}</a></li>)}<li><a href="/how-it-works/"><Icon name="chevron" size={14}/>How It Works</a></li></ul>
     </div>
     <div class="footer-contact-col">
       <h2>Contact Information</h2>
@@ -43,8 +48,11 @@ import { business, navigation } from '../data/site';
   </div>
   <p class="footer-disclaimer container">Opportunities depend on availability and employer selection. Registration does not guarantee employment. Images are representative.</p>
 </footer>
+<div class="float-stack">
+  <a class="float-btn call" href={business.tel} aria-label={`Call ${business.phone}`}><Icon name="phone" size={22}/></a>
+</div>
 <a class="whatsapp-float" href={business.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp"><Icon name="whatsapp" size={30}/><span>Chat with us</span></a>
 <div class="mobile-bar" aria-label="Quick actions">
   <Button href={business.tel} variant="outline" leadingIcon="phone" icon={false}>Call</Button>
-  <Button href="/candidate-registration/">Register Now</Button>
+  <Button href="/candidate-zone/">Register Now</Button>
 </div>

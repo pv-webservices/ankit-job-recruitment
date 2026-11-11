@@ -1,0 +1,59 @@
+---
+import Icon from './Icon.astro';
+import FormField from './FormField.astro';
+import { recruiterServices, recruiterIndustries } from '../lib/recruiter.mjs';
+import { business } from '../data/site';
+import { UPLOAD_ACCEPT } from '../lib/upload.mjs';
+interface Props { id?: string; }
+const { id = 'recruiter' } = Astro.props;
+type FieldType = 'text' | 'tel' | 'email' | 'select' | 'number' | 'textarea' | 'file';
+interface Field { name: string; label: string; type: FieldType; placeholder?: string; autocomplete?: string; options?: string[]; optional?: boolean; wide?: boolean; accept?: string; hint?: string; }
+const groups: { title: string; fields: Field[] }[] = [
+  { title: 'Company information', fields: [
+    { name: 'companyName', label: 'Company name', type: 'text', placeholder: 'Registered company name', autocomplete: 'organization' },
+    { name: 'industry', label: 'Industry', type: 'select', options: recruiterIndustries, placeholder: 'Select industry' },
+    { name: 'contactPerson', label: 'Contact person', type: 'text', placeholder: 'Full name', autocomplete: 'name' },
+    { name: 'designation', label: 'Designation', type: 'text', placeholder: 'e.g. HR Manager', autocomplete: 'organization-title' },
+  ] },
+  { title: 'Contact information', fields: [
+    { name: 'mobile', label: 'Mobile number', type: 'tel', placeholder: '10-digit mobile number', autocomplete: 'tel-national' },
+    { name: 'email', label: 'Business email', type: 'email', placeholder: 'hr@company.com', autocomplete: 'email' },
+  ] },
+  { title: 'Hiring requirement', fields: [
+    { name: 'service', label: 'Service required', type: 'select', options: recruiterServices, placeholder: 'Select service' },
+    { name: 'jobRole', label: 'Job role / position', type: 'text', placeholder: 'e.g. Machine Operator' },
+    { name: 'openings', label: 'Number of openings', type: 'number', placeholder: 'e.g. 25' },
+    { name: 'jobLocation', label: 'Job location', type: 'text', placeholder: 'City, State' },
+    { name: 'details', label: 'Requirement details', type: 'textarea', placeholder: 'Qualification, experience, salary range, shift, joining date…', optional: true, wide: true },
+    { name: 'jobDescription', label: 'Upload job description', type: 'file', accept: UPLOAD_ACCEPT, hint: 'PDF, Word, JPG or PNG · max 5 MB', optional: true, wide: true },
+  ] },
+];
+---
+<div class="registration-card recruiter-card" id={id}>
+  <div class="registration-heading">
+    <span class="icon-badge"><Icon name="building" size={26}/></span>
+    <div><h2>Recruiter Requirement Form</h2><p>Share your manpower requirement and our team will get back to you.</p></div>
+  </div>
+  <div class="registration-body">
+    <div class="notice"><Icon name="lock" size={18}/><p><strong>Straight to our hiring team.</strong>Your requirement and any job description you upload go directly to Ankit Jobs &amp; Staffing India. We usually respond within one working day.</p></div>
+    <form class="candidate-form" method="dialog" novalidate data-recruiter-form>
+      <p class="required-note"><span>*</span> Required fields</p>
+      <div class="form-honeypot" aria-hidden="true"><label>Leave this empty<input name="website" type="text" tabindex="-1" autocomplete="off"/></label></div>
+      {groups.map((group, i) => (
+        <fieldset class="form-group">
+          <legend><span class="num">{i + 1}</span>{group.title}</legend>
+          <div class="form-fields">{group.fields.map((field) => <FormField field={field} id={id}/>)}</div>
+        </fieldset>
+      ))}
+      <div class="consent-row"><input id={`${id}-consent`} name="consent" type="checkbox" required aria-describedby={`${id}-consent-error`}/><label for={`${id}-consent`}>I agree that Ankit Jobs &amp; Staffing India may store and use these details to respond to this requirement, as described in the <a href="/privacy-policy/">privacy notice</a>.</label></div>
+      <span id={`${id}-consent-error`} class="field-error"></span>
+      <div class="form-actions">
+        <button class="button button-primary form-submit" type="submit" disabled><Icon name="send" size={20}/> Submit Requirement</button>
+        <div class="form-status" role="status" aria-live="polite" tabindex="-1"></div>
+      </div>
+      <noscript><p class="form-status">JavaScript is needed to submit this form. Please call <a href={business.tel}>{business.phone}</a> to share your requirement.</p></noscript>
+    </form>
+    <p class="form-assistance" style="margin-top:18px">Prefer to talk? <a href={business.tel}>Call <span class="num">{business.phone}</span></a></p>
+  </div>
+</div>
+<script>import '../scripts/recruiter';</script>

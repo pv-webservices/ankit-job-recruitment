@@ -18,7 +18,7 @@ async function scan(directory) {
   }
 }
 await scan("dist");
-const csp = `default-src 'self'; script-src 'self' ${[...hashes].join(" ")}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests`;
+const csp = `default-src 'self'; script-src 'self' ${[...hashes].join(" ")}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src https://script.google.com https://script.googleusercontent.com; form-action 'none'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests`;
 const headers = {
   "Content-Security-Policy": csp,
   "X-Content-Type-Options": "nosniff",

@@ -1,16 +1,24 @@
 ---
-interface Field { name: string; label: string; type: 'text' | 'tel' | 'email' | 'select' | 'date'; placeholder?: string; autocomplete?: string; options?: string[]; readonly?: boolean; optional?: boolean; }
+type FieldType = 'text' | 'tel' | 'email' | 'select' | 'date' | 'number' | 'textarea' | 'file';
+interface Field { name: string; label: string; type: FieldType; placeholder?: string; autocomplete?: string; options?: string[]; readonly?: boolean; optional?: boolean; wide?: boolean; accept?: string; hint?: string; }
 interface Props { field: Field; id: string; }
 const { field, id } = Astro.props;
 const controlId = `${id}-${field.name}`;
-const maxLength = field.type === 'tel' ? 20 : field.type === 'email' ? 254 : 100;
+const maxLength = field.type === 'tel' ? 20 : field.type === 'email' ? 254 : field.type === 'textarea' ? 1000 : 100;
+const describedBy = `${controlId}-error`;
 ---
-<div class:list={['form-field', `field-${field.name}`]}>
+<div class:list={['form-field', `field-${field.name}`, { 'field-wide': field.wide }]}>
   <label for={controlId}>{field.label}{!field.optional && !field.readonly && <span class="req" aria-hidden="true"> *</span>}{field.optional && <small> (optional)</small>}</label>
   <div class="field-control">
     {field.type === 'select'
-      ? <select id={controlId} name={field.name} required={!field.optional} disabled={field.name === 'district'} aria-describedby={`${controlId}-error`}><option value="">{field.placeholder}</option>{field.options?.map((option) => <option value={option}>{option}</option>)}</select>
-      : <input id={controlId} name={field.name} type={field.type} placeholder={field.placeholder} autocomplete={field.autocomplete} maxlength={maxLength} required={!field.optional && !field.readonly} readonly={field.readonly} inputmode={field.type === 'tel' ? 'tel' : undefined} aria-describedby={`${controlId}-error`}/>}
-    <span id={`${controlId}-error`} class="field-error"></span>
+      ? <select id={controlId} name={field.name} required={!field.optional} disabled={field.name === 'district'} aria-describedby={describedBy}><option value="">{field.placeholder}</option>{field.options?.map((option) => <option value={option}>{option}</option>)}</select>
+      : field.type === 'textarea'
+      ? <textarea id={controlId} name={field.name} rows="4" placeholder={field.placeholder} maxlength={maxLength} required={!field.optional} aria-describedby={describedBy}></textarea>
+      : field.type === 'file'
+      ? <div class="file-drop"><input id={controlId} name={field.name} type="file" accept={field.accept} required={!field.optional} aria-describedby={`${controlId}-hint ${describedBy}`}/><span class="file-drop-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4 M7 9l5-5 5 5 M4 16v4h16v-4"/></svg></span><span class="file-drop-text" data-file-name>Choose a file or drag it here</span><small id={`${controlId}-hint`}>{field.hint}</small></div>
+      : field.type === 'number'
+      ? <input id={controlId} name={field.name} type="number" min="1" max="10000" step="1" inputmode="numeric" placeholder={field.placeholder} required={!field.optional} aria-describedby={describedBy}/>
+      : <input id={controlId} name={field.name} type={field.type} placeholder={field.placeholder} autocomplete={field.autocomplete} maxlength={maxLength} required={!field.optional && !field.readonly} readonly={field.readonly} inputmode={field.type === 'tel' ? 'tel' : undefined} aria-describedby={describedBy}/>}
+    <span id={describedBy} class="field-error"></span>
   </div>
 </div>

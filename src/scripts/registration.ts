@@ -4,6 +4,8 @@ import {
   localISODate,
   validateCandidate,
 } from "../lib/registration.mjs";
+import { validateUpload } from "../lib/upload.mjs";
+import { attachFileLabels, newSubmissionId, runSubmission } from "./submit";
 const districtMap: Record<string, string[]> = districts;
 document
   .querySelectorAll<HTMLFormElement>("[data-candidate-form]")
@@ -15,6 +17,8 @@ document
     const status = form.querySelector<HTMLElement>(".form-status")!;
     let attempted = false;
     let validating = false;
+    const state = { submissionId: newSubmissionId() };
+    attachFileLabels(form);
     function updateDate() {
       dob.max = localISODate();
       field("age").value = String(ageOnDate(dob.value) ?? "");
@@ -32,10 +36,13 @@ document
     function validate() {
       updateDate();
       const data = Object.fromEntries(new FormData(form));
-      const errors = validateCandidate(
+      const errors: Record<string, string> = validateCandidate(
         { ...data, consent: (field("consent") as HTMLInputElement).checked },
         districtMap,
       );
+      const resume = (field("resume") as HTMLInputElement).files?.[0];
+      const uploadError = validateUpload(resume);
+      if (uploadError) errors.resume = uploadError;
       for (const el of Array.from(form.elements)) {
         if (!(
           el instanceof HTMLInputElement || el instanceof HTMLSelectElement
@@ -56,23 +63,24 @@ document
     form.addEventListener("change", () => {
       if (attempted) validate();
     });
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (validating) return;
       validating = true;
-      submit.disabled = true;
       attempted = true;
       const errors = validate();
       if (Object.keys(errors).length) {
+        status.className = "form-status is-error";
         status.textContent = "Please check the highlighted fields.";
         form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
-      } else {
-        status.textContent =
-          "Online registration is not available yet. Your details have not been submitted or saved. Please call +91 8348623389 for a general enquiry.";
-        status.focus();
+      } else if (await runSubmission(form, "candidate", "resume", state)) {
+        attempted = false;
+        const district = field("district") as HTMLSelectElement;
+        district.replaceChildren(new Option("Select state first", ""));
+        district.disabled = true;
+        updateDate();
       }
       validating = false;
-      submit.disabled = false;
     });
     submit.disabled = false;
   });

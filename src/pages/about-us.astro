@@ -5,23 +5,31 @@ import Button from '../components/Button.astro';
 import Icon from '../components/Icon.astro';
 import CareerCTA from '../components/CareerCTA.astro';
 import { reasons } from '../data/site';
+const aboutSectors = ['Technology and Digital Services', 'Banking and Financial Services', 'Manufacturing and Industrial Services', 'Airport & FMCG', 'Construction & Infrastructure', 'Warehouse and Logistics'];
 ---
-<Layout title="About Us — People & Possibilities" description="Meet Ankit Jobs & Staffing India, a recruitment and job placement business helping job seekers in Kolkata, Vizag and Odisha.">
+<Layout title="About Us — People & Possibilities" description="Ankit Jobs & Staffing India is a trusted manpower and staffing partner providing recruitment, staffing and workforce solutions across Odisha, Andhra Pradesh and West Bengal.">
   <PageHero title="People. Possibilities. <em>A Way Forward.</em>" crumb="About Us" eyebrow="About Ankit Jobs & Staffing India" text="Helping job seekers take the next step in their careers." image="hero" imageAlt="Representative Indian office and industrial professionals"/>
 
   <section class="section">
-    <div class="container split">
-      <div class="split-media" data-reveal>
+    <div class="container split" style="align-items:start">
+      <div class="split-media" data-reveal style="position:sticky;top:180px">
         <div class="frame"><img src="/images/placement.webp" alt="A candidate and recruiter having a career conversation" width="960" height="640" loading="lazy" decoding="async"/></div>
-        <span class="frame-tag"><Icon name="sparkle" size={16}/>Your Career… Our Mission</span>
+        <span class="frame-tag"><Icon name="sparkle" size={16}/>Your Career, Our Mission</span>
       </div>
       <div class="split-copy" data-reveal>
-        <span class="eyebrow">A connection that matters</span>
-        <h2>The right conversation can open a new door.</h2>
-        <p>Ankit Jobs &amp; Staffing India is a recruitment and job placement business serving candidates in Kolkata, Vizag and Odisha.</p>
-        <p>For a job seeker, the next step begins with sharing career interests, qualifications and a preferred location.</p>
-        <p>Our mission is to connect candidates with suitable opportunities through recruitment assistance, with clear next steps for each enquiry.</p>
-        <div class="chip-row" style="margin-top:24px">{['Kolkata', 'Vizag', 'Odisha'].map((place) => <span class="chip"><Icon name="pin" size={16}/>{place}</span>)}</div>
+        <span class="eyebrow">Who we are</span>
+        <h2>Your Trusted Manpower &amp; Staffing Partner.</h2>
+        <p>Ankit Jobs &amp; Staffing India is a trusted manpower and staffing partner in India, providing recruitment, staffing and workforce solutions for businesses.</p>
+        <p>Ankit Jobs helps employers address talent acquisition, workforce management and manpower requirements through customized staffing solutions across sectors and locations.</p>
+        <p><strong>We provide verified, skilled and reliable manpower for:</strong></p>
+        <ol class="about-list">{aboutSectors.map((sector) => <li>{sector}</li>)}</ol>
+        <p class="mission-quote">Our mission is simple — Right Manpower, At The Right Time, At The Right Place.</p>
+        <p>With a ready database of verified candidates, strong local network in Odisha &amp; Andhra Pradesh and West Bengal, 24-48 hours quick deployment, we have become a trusted hiring partner for growing businesses.</p>
+        <div class="stat-row">
+          <div class="stat"><strong>24–48 hrs</strong>Quick deployment</div>
+          <div class="stat"><strong>3 States</strong>Odisha · AP · West Bengal</div>
+          <div class="stat"><strong>Verified</strong>Candidate database</div>
+        </div>
       </div>
     </div>
   </section>
@@ -30,8 +38,8 @@ import { reasons } from '../data/site';
     <div class="container">
       <div class="section-head center" data-reveal><span class="eyebrow">Who we work with</span><h2>Your Career. One Partner.</h2></div>
       <div class="grid-2">
-        <article class="card lift" data-reveal><span class="icon-badge"><Icon name="briefcase" size={26}/></span><h3>For job seekers — take your next step with clarity.</h3><p>Explore the candidate form, understand the information requested and contact the team about current opportunities. Enquiries and registrations do not guarantee employment.</p><Button href="/candidate-registration/">Candidate Registration</Button></article>
-        <article class="card lift" data-reveal style="--delay:90ms"><span class="icon-badge navy"><Icon name="search" size={26}/></span><h3>Explore careers — know what is available.</h3><p>Visit the Career page to learn how job placement works and call or WhatsApp the team to ask about current openings in your preferred location.</p><Button href="/career/" variant="navy">Explore Careers</Button></article>
+        <article class="card lift" data-reveal><span class="icon-badge"><Icon name="briefcase" size={26}/></span><h3>For job seekers — take your next step with clarity.</h3><p>Explore the candidate form, understand the information requested and contact the team about current opportunities. Enquiries and registrations do not guarantee employment.</p><Button href="/candidate-zone/">Candidate Registration</Button></article>
+        <article class="card lift" data-reveal style="--delay:90ms"><span class="icon-badge navy"><Icon name="search" size={26}/></span><h3>Explore careers — know what is available.</h3><p>Visit the Career page to learn how job placement works and call or WhatsApp the team to ask about current openings in your preferred location.</p><Button href="/current-openings/" variant="navy">Explore Careers</Button></article>
       </div>
     </div>
   </section>

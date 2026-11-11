@@ -27,12 +27,22 @@ const paths: Record<string, string> = {
   cross: 'm6 6 12 12 M18 6 6 18',
   user: 'M20 21a8 8 0 0 0-16 0 M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z',
   sparkle: 'M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2Z',
+  globe: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z M2 12h20 M12 2c3 3 4 6.5 4 10s-1 7-4 10c-3-3-4-6.5-4-10s1-7 4-10Z',
+  health: 'M9 3h6v6h6v6h-6v6H9v-6H3V9h6Z',
+  chip: 'M7 7h10v10H7Z M10 10h4v4h-4Z M10 2v5 M14 2v5 M10 17v5 M14 17v5 M2 10h5 M2 14h5 M17 10h5 M17 14h5',
+  bank: 'M3 10 12 4l9 6 M5 10v8 M9.5 10v8 M14.5 10v8 M19 10v8 M3 21h18 M3 18h18',
+  factory: 'M2 21V10l6 4V10l6 4V6h3l1-3h2v18Z M2 21h20 M6 17h2 M11 17h2 M16 17h2',
+  cart: 'M2 3h3l3 12h11l3-8H7 M9 20a1 1 0 1 0 0 .1Z M18 20a1 1 0 1 0 0 .1Z',
+  target: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z M12 12h.01',
   info: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z M12 16v-5 M12 8h.01',
 };
 // Official-style WhatsApp glyph (filled) — sized via the svg box so it never squeezes.
 const whatsapp = 'M16.04 3C9.4 3 4 8.36 4 14.97c0 2.11.56 4.17 1.62 5.99L4 27l6.23-1.6a12.1 12.1 0 0 0 5.8 1.47h.01C22.68 26.87 28 21.5 28 14.9 28 11.7 26.75 8.7 24.48 6.45A11.9 11.9 0 0 0 16.04 3Zm0 21.84h-.01c-1.8 0-3.56-.48-5.1-1.39l-.37-.22-3.7.95.99-3.58-.24-.37a9.8 9.8 0 0 1-1.51-5.26c0-5.48 4.48-9.93 9.96-9.93 2.66 0 5.16 1.03 7.04 2.9a9.8 9.8 0 0 1 2.91 7.03c0 5.48-4.47 9.87-9.97 9.87Zm5.46-7.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.65.08-.3-.15-1.26-.46-2.4-1.47a9 9 0 0 1-1.66-2.06c-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.48.71.31 1.27.5 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z';
+const facebook = 'M13.5 22v-8.2h2.8l.4-3.2h-3.2V8.5c0-.9.3-1.6 1.6-1.6h1.7V4.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.3v3.2h2.8V22Z';
 const cls = [className, `icon-${name}`].filter(Boolean).join(' ');
 ---
-{name === 'whatsapp'
+{name === 'facebook'
+  ? <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" class={cls} aria-hidden="true" focusable="false"><path d={facebook}/></svg>
+  : name === 'whatsapp'
   ? <svg width={size} height={size} viewBox="0 0 32 32" fill="currentColor" class={cls} aria-hidden="true" focusable="false"><path d={whatsapp}/></svg>
   : <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class={cls} aria-hidden="true" focusable="false"><path d={paths[name] || paths.briefcase}/></svg>}

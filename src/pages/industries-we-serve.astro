@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import CareerCTA from '../components/CareerCTA.astro';
+import { industries } from '../data/site';
+---
+<Layout title="Industries We Serve" description="Ankit Jobs & Staffing India provides manpower for healthcare, technology, banking, manufacturing, retail and construction businesses.">
+  <PageHero title="The Right People for <em>Every Industry.</em>" crumb="Industries We Serve" eyebrow="Industries we serve" text="Verified, skilled and reliable manpower for the sectors that power India’s growth." image="bulk-hiring" imageAlt="Representative professionals from different industries"/>
+
+  <section class="section bg-surface">
+    <div class="container">
+      <div class="section-head center" data-reveal><span class="eyebrow">Sector expertise</span><h2>Industries We Serve</h2><p class="lead">Customised staffing solutions across sectors and locations.</p></div>
+      <div class="grid-3">
+        {industries.map((ind, i) => (
+          <article class="card lift industry-card" data-reveal style={`--delay:${i * 70}ms`}>
+            <span class:list={['icon-badge', { navy: i % 2 === 1 }]}><Icon name={ind.icon} size={26}/></span>
+            <h3>{ind.title}</h3>
+            <p>{ind.text}</p>
+          </article>
+        ))}
+      </div>
+      <div class="feature-panel" data-reveal style="margin-top:clamp(40px,5vw,64px)">
+        <span class="icon-badge"><Icon name="building" size={28}/></span>
+        <h2>Hiring in a sector not listed here?</h2>
+        <p class="lead">Tell us about your requirement — we also support Airport &amp; FMCG, warehouse and logistics roles.</p>
+        <div class="button-row stack-sm"><Button href="/recruiter-zone/">Share Your Requirement</Button><Button href="/contact-us/" variant="outline">Contact Us</Button></div>
+      </div>
+    </div>
+  </section>
+  <CareerCTA/>
+</Layout>

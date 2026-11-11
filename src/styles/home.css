@@ -16,7 +16,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 86% 40%;
+  object-position: 70% 35%;
   animation: hero-zoom 1800ms var(--ease-out) both;
   will-change: transform;
 }
@@ -98,8 +98,8 @@
 }
 .hero-badge {
   position: absolute;
-  right: var(--gutter);
-  top: 40px;
+  right: calc(var(--gutter) + 90px);
+  bottom: 48px;
   display: flex;
   align-items: center;
   gap: 14px;

@@ -5,8 +5,11 @@ const base = process.env.QA_BASE_URL || "http://127.0.0.1:4322";
 const routes = [
   "/",
   "/about-us/",
-  "/career/",
-  "/candidate-registration/",
+  "/current-openings/",
+  "/candidate-zone/",
+  "/recruiter-zone/",
+  "/our-services/",
+  "/industries-we-serve/",
   "/how-it-works/",
   "/contact-us/",
   "/faq/",
@@ -41,7 +44,7 @@ for (const [name, engine, options] of [
         assert.equal(await page.locator("h1").isVisible(), true);
       }
     }
-    await page.goto(base + "/candidate-registration/");
+    await page.goto(base + "/candidate-zone/");
     await page.locator("[name=state]").selectOption("West Bengal");
     await page.locator("[name=district]").selectOption("Kolkata");
     await page.locator("[name=dob]").fill("2000-11-10");

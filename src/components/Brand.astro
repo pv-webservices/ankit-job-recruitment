@@ -2,7 +2,17 @@
 interface Props { footer?: boolean; drawer?: boolean; }
 const { footer = false, drawer = false } = Astro.props;
 ---
-<a class:list={['brand', { 'brand-footer': footer }]} href="/" aria-label="Ankit Jobs & Staffing India — Home">
-  <img src="/images/logo-badge.webp" srcset="/images/logo-badge.webp 1x, /images/logo-badge-2x.webp 2x" alt="" width="62" height="62" loading={footer ? 'lazy' : 'eager'} decoding="async"/>
-  <span class="brand-copy"><span class="brand-name">Ankit Jobs &amp; <b>Staffing India.</b></span>{!drawer && <span class="brand-tag">Recruitment ! Staffing</span>}</span>
+<a class:list={['brand', { 'brand-footer': footer, 'brand-drawer': drawer }]} href="/" aria-label="Ankit Jobs & Staffing India — Your Career, Our Mission — Home">
+  <span class="brand-top">
+    <img src="/images/logo-badge.webp" srcset="/images/logo-badge.webp 1x, /images/logo-badge-2x.webp 2x" alt="" width="62" height="62" loading={footer ? 'lazy' : 'eager'} decoding="async"/>
+    <span class="brand-words" aria-hidden="true">
+      <span class="brand-line">Ankit Jobs <span class="brand-amp">&amp;</span></span>
+      <span class="brand-pill"><span class="brand-staffing">Staffing</span> <span class="brand-india">India</span></span>
+    </span>
+  </span>
+  <span class="brand-tagline" aria-hidden="true"><span>Your Career, Our Mission</span></span>
+  <svg class="brand-swoosh" viewBox="0 0 200 8" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M2 6 Q100 -1 198 4" fill="none" stroke="#ff9933" stroke-width="2.2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <path d="M18 7.6 Q100 2.5 182 6.6" fill="none" stroke="#138808" stroke-width="1.6" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+  </svg>
 </a>

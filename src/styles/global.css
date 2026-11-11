@@ -3,6 +3,8 @@
 @import "./base.css";
 @import "./components.css";
 @import "./chrome.css";
+@import "./header.css";
 @import "./form.css";
 @import "./home.css";
 @import "./pages.css";
+@import "./sections.css";

@@ -7,15 +7,15 @@ import Process from '../components/Process.astro';
 import FAQ from '../components/FAQ.astro';
 import CareerCTA from '../components/CareerCTA.astro';
 import { business, reasons, locations } from '../data/site';
-const marquee = ['Career Placement', 'Job Opportunities', 'Candidate Registration', 'Kolkata', 'Vizag', 'Odisha', 'Your Career… Our Mission'];
-const heroAlt = 'Three young Indian professionals — an office executive, a customer-service executive and a site technician — on a Kolkata riverfront with Howrah Bridge behind them';
+const marquee = ['Career Placement', 'Job Opportunities', 'Candidate Registration', 'Kolkata', 'Vizag', 'Odisha', 'Your Career, Our Mission'];
+const heroAlt = "An HR recruiter shaking hands with a selected candidate after a job interview, with the hiring manager and other candidates in the background";
 ---
-<Layout title="Recruitment & Staffing in Kolkata, Vizag & Odisha" description="Ankit Jobs & Staffing India connects job seekers with career opportunities — candidate registration and job placement support in Kolkata, Vizag and Odisha." preloadImage={{ href: '/images/hero-kolkata.webp', srcset: '/images/hero-kolkata-960.webp 960w, /images/hero-kolkata.webp 1536w', sizes: '(max-width: 899px) 100vw, 64vw' }}>
+<Layout title="Recruitment & Staffing in Kolkata, Vizag & Odisha" description="Ankit Jobs & Staffing India connects job seekers with career opportunities — candidate registration and job placement support in Kolkata, Vizag and Odisha." preloadImage={{ href: '/images/hero-hiring.webp', srcset: '/images/hero-hiring-960.webp 960w, /images/hero-hiring.webp 1536w', sizes: '(max-width: 899px) 100vw, 64vw' }}>
 
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-media" aria-hidden="true">
-      <img data-parallax src="/images/hero-kolkata.webp" srcset="/images/hero-kolkata-960.webp 960w, /images/hero-kolkata.webp 1536w" sizes="64vw" alt="" width="1536" height="1024" fetchpriority="high" decoding="async"/>
+      <img data-parallax src="/images/hero-hiring.webp" srcset="/images/hero-hiring-960.webp 960w, /images/hero-hiring.webp 1536w" sizes="64vw" alt="" width="1536" height="1024" fetchpriority="high" decoding="async"/>
     </div>
     <div class="container hero-inner">
       <div class="hero-copy hero-anim">
@@ -24,10 +24,10 @@ const heroAlt = 'Three young Indian professionals — an office executive, a cus
         <p class="hero-lead">A recruitment and job placement partner helping job seekers find the right opportunity and build their careers — across Kolkata, Vizag and Odisha.</p>
         <div class="button-row">
           <Button href="#register">Apply for a Job</Button>
-          <Button href="/career/" variant="ghost-light">Explore Careers</Button>
+          <Button href="/current-openings/" variant="ghost-light">Explore Careers</Button>
         </div>
         <div class="hero-mobile-media">
-          <img src="/images/hero-kolkata-960.webp" srcset="/images/hero-kolkata-960.webp 960w, /images/hero-kolkata.webp 1536w" sizes="100vw" alt={heroAlt} width="960" height="640" decoding="async"/>
+          <img src="/images/hero-hiring-960.webp" srcset="/images/hero-hiring-960.webp 960w, /images/hero-hiring.webp 1536w" sizes="100vw" alt={heroAlt} width="960" height="640" decoding="async"/>
           <span class="frame-tag"><Icon name="pin" size={16}/>Kolkata · Vizag · Odisha</span>
         </div>
         <ul class="hero-trust">
@@ -39,7 +39,7 @@ const heroAlt = 'Three young Indian professionals — an office executive, a cus
     </div>
     <div class="hero-badge" aria-hidden="true">
       <img src="/images/logo-badge.webp" alt="" width="54" height="54"/>
-      <div><strong>Your Career… Our Mission</strong><span>Ankit Jobs &amp; Staffing India</span></div>
+      <div><strong>Your Career, Our Mission</strong><span>Ankit Jobs &amp; Staffing India</span></div>
     </div>
   </section>
 

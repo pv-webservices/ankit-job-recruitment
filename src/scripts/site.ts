@@ -50,13 +50,13 @@ document.addEventListener("keydown", (event) => {
     }
   }
 });
-matchMedia("(min-width: 1024px)").addEventListener("change", (e) => {
+matchMedia("(min-width: 1100px)").addEventListener("change", (e) => {
   if (e.matches && drawer?.classList.contains("is-open")) setDrawer(false, false);
 });
 
 /* ---------- Scroll state: header shadow + mobile action bar ---------- */
 const mobileBar = document.querySelector<HTMLElement>(".mobile-bar");
-const onRegistrationPage = location.pathname.startsWith("/candidate-registration");
+const onRegistrationPage = location.pathname.startsWith("/candidate-zone") || location.pathname.startsWith("/recruiter-zone");
 let ticking = false;
 function onScroll() {
   const y = window.scrollY;

@@ -1,39 +1,38 @@
-# Candidate form — live collection is disabled
+# Candidate & recruiter forms — Google Sheets + Drive
 
-The homepage and registration page use the same twelve fields, validation module and browser controller. The dedicated form groups them by personal information, contact information, and education/location.
+Both forms (Candidate Zone, Recruiter Zone) validate in the browser, then POST JSON to a
+Google Apps Script web app bound to the Google Sheet **"Ankit Jobs - Website Applications"**.
 
-**No submission endpoint exists.** The form performs local validation and explicitly says details were not submitted. It does not create a success page. There is no SMTP, FormSubmit, data email, WhatsApp payload, localStorage, tracking or application logging. General WhatsApp and telephone links work independently.
+- Rows go to the **Candidates** / **Recruiters** tabs (header row is created automatically).
+- Optional uploads (resume / job description; PDF, Word, JPG, PNG, max 5 MB) are saved to the
+  private Drive folder **"Ankit Jobs - Website Uploads"** and linked from the row.
+- Each submission gets a reference (`C-XXXXXXXX` / `R-XXXXXXXX`) shown to the visitor.
 
-`method="dialog"` prevents native navigation if JavaScript fails; the button is disabled until the controller attaches. Generated CSP also sets `form-action 'none'` and `connect-src 'none'`. This is a deliberate safety state. Do not enable a URL by changing an environment variable or only removing the notice.
+## Pieces
 
-## Before implementing live collection
+| Where | What |
+|---|---|
+| `google-apps-script/Code.gs` | Source of the Apps Script (keep in sync with the online editor) |
+| `src/data/site.ts` → `formEndpoint` | Web app `/exec` URL (override with `PUBLIC_FORM_ENDPOINT`) |
+| `src/scripts/submit.ts` | Browser submit, base64 upload, timeout, duplicate-safe submission IDs |
+| `src/lib/upload.mjs` | Upload type/size rules (tested in `tests/upload.test.mjs`) |
+| `scripts/security-headers.mjs` | CSP `connect-src` allows only `script.google.com` / `script.googleusercontent.com` |
 
-Obtain the approved data purpose, necessity of each field (especially parents’ names, DOB and gender), retention/deletion periods, authorized recipients, processor/storage choice, candidate rights contact, age eligibility and final consent text. The draft privacy page lists these decisions. A privacy professional should review the final policy for the applicable Indian requirements; this repository makes no legal compliance claim.
+## Server-side protections (Code.gs)
 
-Once the business approves a specific secure provider or handler, implement and review:
+Field allowlist, required-field and email checks, 1000-char cap, formula-injection guard
+(`=`, `+`, `-`, `@` prefixed with `'`), MIME/size checks on uploads, honeypot field, script
+lock for concurrent writes, and a 6-hour cache of submission IDs to ignore double submits.
 
-1. HTTPS POST with a small JSON body, a field allowlist and server-side length/type/enum validation. Recalculate age on the server; do not trust the readonly field.
-2. State/district validation against the maintained snapshot, date validation, phone and email validation. Preserve Unicode names; encode on output.
-3. Origin/CSRF checks appropriate to the chosen handler, spam controls and shared rate limiting with bounded request size and timeouts.
-4. Encryption, least-privilege storage access, authorized-recipient controls and a defined deletion process covering backups.
-5. No personal data in URLs, logs, analytics, error tracking or public responses. No external scripts can read form contents.
-6. An idempotency key and disabled in-flight button to prevent duplicate submissions. Acknowledge success only after durable server confirmation, with a non-sensitive receipt ID.
-7. Accessible loading, success, offline, timeout, validation and server-error feedback. Re-enable retry safely after failure; do not falsely claim a timed-out request was not received.
-8. Update CSP narrowly for the approved endpoint, then update the privacy notice, consent, FAQs, no-JavaScript handling and integration tests on **both** pages.
+## Changing the script
 
-Use synthetic test records in a staging endpoint first. Real candidate receipt and deletion testing require explicit authorization; none has been performed.
+1. Edit `google-apps-script/Code.gs`, paste it into the Apps Script editor (Extensions → Apps Script from the Sheet), save.
+2. **Deploy → Manage deployments → edit (pencil) → Version: New version → Deploy.** Editing the
+   existing deployment keeps the same `/exec` URL. A *new* deployment creates a new URL that must be
+   copied into `formEndpoint`.
 
-## Current validation decisions
+## Ownership
 
-- Indian mobile: 10 national digits starting 6–9; optional +91/91 prefix and common formatting separators.
-- Alternative number: optional; the same validation when supplied.
-- DOB: exact calendar date, future dates rejected; age uses the current **browser-local calendar date**, not UTC or elapsed milliseconds.
-- Leap-day birthdays: age increments on 1 March during non-leap years. This is a display convention to confirm with the client, not a legal eligibility rule.
-- Gender includes “Prefer not to say”; it is not used to determine eligibility.
-- Whitespace-only names, invalid enum values, missing consent and cross-state district values are rejected.
-
-## District data
-
-Bundled locally: 36 states/union territories and 784 districts from a maintained LGD-derived repository, snapshot **23 September 2026**, retrieved 10 November 2026. See `src/data/lgd-metadata.json` and `docs/ASSETS-AND-SOURCES.md`. No candidate information or runtime request is sent to that source.
-
-Administrative divisions can change. Compare with the current official LGD export and refresh/review the snapshot before live collection. Do not present the snapshot date as a guarantee that every subsequent administrative change is included.
+The Sheet, script and Drive folder currently belong to the Google account that authorised the
+script. To move them to the business account, share/transfer the Sheet and Drive folder, then
+re-create the deployment from that account and update `formEndpoint`.

@@ -23,7 +23,7 @@ assert.ok(
 );
 assert.ok(robots.includes("Allow: /"));
 assert.ok(robots.includes("https://example.test/sitemap.xml"));
-assert.equal((sitemap.match(/<loc>/g) || []).length, 7);
+assert.equal((sitemap.match(/<loc>/g) || []).length, 10);
 assert.ok(!sitemap.includes("privacy-policy"));
 assert.ok(legal.includes('name="robots" content="noindex, follow"'));
 const previewHome = await readFile("dist/index.html", "utf8");
@@ -32,5 +32,5 @@ assert.ok(previewHome.includes('name="robots" content="noindex, follow"'));
 assert.ok(!previewHome.includes('rel="canonical"'));
 assert.ok(previewRobots.includes("Disallow: /"));
 console.log(
-  "PASS: approved-origin configuration generates canonical/OG URLs and 7 sitemap entries; default preview stays crawl-blocked; legal draft stays noindex. Test origin exists only under ignored output/.",
+  "PASS: approved-origin configuration generates canonical/OG URLs and 10 sitemap entries; default preview stays crawl-blocked; legal draft stays noindex. Test origin exists only under ignored output/.",
 );

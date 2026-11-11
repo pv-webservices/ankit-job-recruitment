@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import RecruiterForm from '../components/RecruiterForm.astro';
+import Icon from '../components/Icon.astro';
+import { business } from '../data/site';
+---
+<Layout title="Recruiter Zone — Hire with Us" description="Employers: share your manpower requirement with Ankit Jobs & Staffing India for recruitment, staffing, overseas placement and training.">
+  <PageHero title="Hire the Right Talent, <em>Faster.</em>" crumb="Recruiter Zone" eyebrow="Recruiter zone" text="Share your hiring requirement — verified candidates and 24–48 hour quick deployment across Odisha, Andhra Pradesh and West Bengal."/>
+  <section class="section bg-ice">
+    <div class="container register-wrap">
+      <aside class="register-aside" data-reveal>
+        <span class="eyebrow">For employers</span>
+        <h2>Right Manpower. <span class="text-blue">Right Time. Right Place.</span></h2>
+        <ul class="check-list">
+          <li><Icon name="check" size={16}/>Ready database of verified candidates.</li>
+          <li><Icon name="check" size={16}/>Strong local network in Odisha, Andhra Pradesh &amp; West Bengal.</li>
+          <li><Icon name="check" size={16}/>24–48 hour quick deployment.</li>
+          <li><Icon name="check" size={16}/>Permanent, contract and bulk hiring.</li>
+        </ul>
+        <div class="notice"><Icon name="phone" size={18}/><p><strong>Urgent requirement?</strong>Call <a href={business.tel} class="num">{business.phone}</a> or <a href={business.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp us</a> for a quick discussion.</p></div>
+        <div class="register-photo"><div class="frame"><img src="/images/employer.webp" alt="An employer reviewing hiring requirements" width="960" height="640" loading="lazy" decoding="async"/></div></div>
+      </aside>
+      <RecruiterForm id="recruiter-requirement"/>
+    </div>
+  </section>
+</Layout>

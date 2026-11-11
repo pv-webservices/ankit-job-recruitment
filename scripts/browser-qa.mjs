@@ -61,8 +61,8 @@ const base = "http://127.0.0.1:4323";
 const routes = [
   "/",
   "/about-us/",
-  "/career/",
-  "/candidate-registration/",
+  "/current-openings/",
+  "/candidate-zone/",
   "/how-it-works/",
   "/contact-us/",
   "/faq/",
@@ -138,7 +138,7 @@ try {
   console.log(
     `Responsive checks passed: ${report.responsive.length}. Running form and navigation checks.`,
   );
-  for (const route of ["/", "/candidate-registration/"]) {
+  for (const route of ["/", "/candidate-zone/"]) {
     await page.goto(base + route);
     const form = page.locator("[data-candidate-form]");
     assert.equal(
@@ -241,8 +241,8 @@ try {
   );
   for (const [route, filename] of [
     ["/", "home"],
-    ["/candidate-registration/", "registration"],
-    ["/career/", "career"],
+    ["/candidate-zone/", "registration"],
+    ["/current-openings/", "career"],
     ["/contact-us/", "contact"],
   ]) {
     for (const [width, label] of [
@@ -298,7 +298,7 @@ try {
       const p = await instance.newPage({
         viewport: { width: 390, height: 844 },
       });
-      await p.goto(base + "/candidate-registration/");
+      await p.goto(base + "/candidate-zone/");
       await p.locator("[name=state]").selectOption("West Bengal");
       await p.locator("[name=district]").selectOption("Kolkata");
       assert.equal(await p.locator("[name=district]").inputValue(), "Kolkata");

@@ -1,0 +1,473 @@
+/* Header: brand lockup row + full-width navigation bar. */
+:root {
+  --saffron: #ff9933;
+  --india-green: #138808;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgb(255 255 255 / 0.97);
+  transition: box-shadow var(--dur) var(--ease-out);
+}
+@supports (backdrop-filter: blur(1px)) {
+  .site-header {
+    background: rgb(255 255 255 / 0.9);
+    backdrop-filter: saturate(1.4) blur(14px);
+  }
+}
+.site-header.is-scrolled {
+  box-shadow: 0 10px 30px rgb(6 27 76 / 0.12);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: var(--header-h);
+  transition: height var(--dur) var(--ease-out);
+}
+
+/* ---------- Brand lockup ----------
+   One size variable drives everything: the wordmark column is exactly the
+   badge height, and the tagline + swoosh span the full lockup width. */
+.brand {
+  --logo-h: 60px;
+  display: inline-grid;
+  grid-template-columns: max-content;
+  justify-items: stretch;
+  flex-shrink: 0;
+  min-width: 0;
+  color: var(--navy-800);
+  text-decoration: none;
+  line-height: 1;
+}
+.brand-top {
+  display: flex;
+  align-items: stretch;
+  gap: calc(var(--logo-h) * 0.18);
+}
+.brand img {
+  width: var(--logo-h);
+  height: var(--logo-h);
+  flex-shrink: 0;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 8px rgb(3 20 46 / 0.25));
+  transition: transform 500ms var(--ease-out);
+}
+.brand:hover img {
+  transform: rotate(-6deg) scale(1.05);
+}
+.brand-words {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: var(--logo-h);
+  font-family: var(--font-display);
+  white-space: nowrap;
+}
+.brand-line {
+  font-size: calc(var(--logo-h) * 0.44);
+  font-weight: 800;
+  font-stretch: 92%;
+  letter-spacing: -0.025em;
+  line-height: 0.95;
+  color: var(--navy-800);
+}
+.brand-amp {
+  color: var(--navy-700);
+}
+.brand-pill {
+  position: relative;
+  overflow: hidden;
+  padding: calc(var(--logo-h) * 0.04) calc(var(--logo-h) * 0.2) calc(var(--logo-h) * 0.055);
+  border: 2px solid var(--gold-400);
+  border-radius: var(--r-pill);
+  background: linear-gradient(135deg, var(--navy-950), var(--navy-800) 60%, var(--navy-700));
+  box-shadow:
+    0 3px 10px rgb(3 20 46 / 0.22),
+    inset 0 1px 0 rgb(255 255 255 / 0.15);
+  font-size: calc(var(--logo-h) * 0.34);
+  font-weight: 800;
+  font-stretch: 92%;
+  letter-spacing: -0.015em;
+  line-height: 1;
+}
+.brand-pill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.28) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: brand-shine 5.5s var(--ease-in-out) 1.2s infinite;
+}
+.brand-staffing {
+  color: var(--white);
+}
+.brand-india {
+  background: linear-gradient(180deg, var(--gold-300), var(--gold-400) 55%, #f29a0c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.brand-tagline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: calc(var(--logo-h) * 0.1);
+  color: var(--navy-800);
+  font-family: var(--font-body);
+  font-size: calc(var(--logo-h) * 0.205);
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.brand-tagline::before,
+.brand-tagline::after {
+  content: "";
+  flex: 1 1 0;
+  min-width: 6px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.75;
+}
+.brand-swoosh {
+  display: block;
+  width: 100%;
+  height: calc(var(--logo-h) * 0.1);
+  margin-top: calc(var(--logo-h) * 0.03);
+  overflow: visible;
+}
+@keyframes brand-shine {
+  0%,
+  70% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-pill::after {
+    animation: none;
+  }
+}
+
+/* Footer and drawer sit on navy. */
+.brand-footer {
+  --logo-h: 52px;
+}
+.brand-drawer {
+  --logo-h: 42px;
+}
+.brand-footer .brand-line,
+.brand-footer .brand-amp,
+.brand-drawer .brand-line,
+.brand-drawer .brand-amp {
+  color: var(--white);
+}
+.brand-footer .brand-tagline,
+.brand-drawer .brand-tagline {
+  color: var(--gold-300);
+}
+.brand-footer .brand-pill,
+.brand-drawer .brand-pill {
+  background: linear-gradient(135deg, var(--navy-700), var(--blue-600));
+}
+
+/* ---------- Header actions ---------- */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+.header-callbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px 6px 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  color: var(--navy-800);
+  text-decoration: none;
+  transition:
+    border-color var(--dur-fast),
+    box-shadow var(--dur-fast);
+}
+.header-callbox:hover {
+  border-color: var(--gold-400);
+  box-shadow: var(--shadow-sm);
+  color: var(--navy-800);
+}
+.callbox-ico {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--navy-800);
+  color: var(--gold-400);
+}
+.callbox-ico::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid var(--gold-400);
+  animation: call-ring 2.4s var(--ease-out) infinite;
+}
+@keyframes call-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .callbox-ico::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+.header-callbox small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.header-callbox strong {
+  display: block;
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+.social-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: var(--white);
+  text-decoration: none;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast);
+}
+.social-btn:hover {
+  color: var(--white);
+  transform: translateY(-2px);
+}
+.social-btn.facebook {
+  background: #1877f2;
+}
+.social-btn.facebook:hover {
+  box-shadow: 0 8px 18px rgb(24 119 242 / 0.35);
+}
+.social-btn.call {
+  background: var(--navy-800);
+  color: var(--gold-400);
+}
+.header-mobile-actions {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+.menu-toggle {
+  display: none;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--navy-800);
+  color: var(--white);
+  transition: background var(--dur-fast);
+}
+.menu-toggle:hover {
+  background: var(--navy-700);
+}
+
+/* ---------- Navigation bar ---------- */
+.nav-bar {
+  position: relative;
+  background: linear-gradient(90deg, var(--navy-950), var(--navy-800) 50%, var(--navy-950));
+}
+.nav-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--saffron) 0 33.3%, var(--white) 33.3% 66.6%, var(--india-green) 66.6%);
+}
+.main-nav {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 2px;
+}
+.main-nav a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 clamp(10px, 1.1vw, 18px);
+  color: rgb(255 255 255 / 0.86);
+  font-size: 0.93rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    color var(--dur-fast),
+    background var(--dur-fast);
+}
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 9px;
+  width: 22px;
+  height: 3px;
+  margin-left: -11px;
+  border-radius: 3px;
+  background: var(--gold-400);
+  transform: scaleX(0);
+  transition: transform var(--dur) var(--ease-out);
+}
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--white);
+  background: rgb(255 255 255 / 0.06);
+}
+.main-nav a.active {
+  color: var(--gold-300);
+}
+.main-nav a:hover::after,
+.main-nav a.active::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width: 1100px) {
+  :root {
+    --header-h: 96px;
+  }
+}
+@media (max-width: 1279px) {
+  .header-callbox small {
+    display: none;
+  }
+}
+@media (max-width: 1099px) {
+  .nav-bar,
+  .header-actions {
+    display: none;
+  }
+  .header-mobile-actions {
+    display: flex;
+  }
+  .menu-toggle {
+    display: inline-grid;
+  }
+  .site-header {
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(90deg, var(--saffron) 0 33.3%, var(--white) 33.3% 66.6%, var(--india-green) 66.6%) 1;
+  }
+}
+@media (max-width: 899px) {
+  .site-header .brand {
+    --logo-h: 46px;
+  }
+}
+@media (max-width: 419px) {
+  .header-inner {
+    gap: 8px;
+  }
+  .site-header .brand {
+    --logo-h: 38px;
+  }
+  .header-mobile-actions .social-btn,
+  .menu-toggle {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* ---------- Footer social + floating Call ---------- */
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+.social-btn.whatsapp {
+  background: var(--whatsapp);
+}
+.site-footer .social-btn.call {
+  background: var(--gold-400);
+  color: var(--navy-900);
+}
+.float-stack {
+  position: fixed;
+  right: max(22px, calc(env(safe-area-inset-right) + 6px));
+  bottom: calc(max(20px, env(safe-area-inset-bottom)) + 72px);
+  z-index: 70;
+  display: grid;
+  gap: 12px;
+  transition: bottom var(--dur) var(--ease-out);
+}
+.float-btn {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: var(--white);
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgb(3 20 46 / 0.28);
+  transition: transform var(--dur) var(--ease-out);
+}
+.float-btn:hover {
+  color: var(--white);
+  transform: translateY(-3px) scale(1.04);
+}
+.float-btn.facebook {
+  background: #1877f2;
+}
+.float-btn.call {
+  position: relative;
+  background: var(--navy-800);
+  color: var(--gold-400);
+}
+.float-btn.call::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--navy-700);
+  animation: call-ring 2.4s var(--ease-out) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .float-btn.call::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+@media (max-width: 767px) {
+  .has-mobile-bar .float-stack {
+    bottom: calc(154px + env(safe-area-inset-bottom));
+  }
+}

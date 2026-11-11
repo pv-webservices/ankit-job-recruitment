@@ -12,6 +12,10 @@ export default defineConfig({
   output: "static",
   devToolbar: { enabled: false },
   trailingSlash: "always",
+  redirects: {
+    "/candidate-registration/": "/candidate-zone/",
+    "/career/": "/current-openings/",
+  },
   build: { inlineStylesheets: "never" },
   vite: { build: { assetsInlineLimit: 0 } },
 });

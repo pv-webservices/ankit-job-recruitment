@@ -16,6 +16,7 @@ const descriptions = new Set();
 let pages = 0;
 for (const path of files.filter((path) => path.endsWith(".html"))) {
   const html = await readFile(path, "utf8");
+  if (/<meta http-equiv="refresh"/.test(html)) continue; // Astro redirect stubs (old URLs)
   assert.equal(
     (html.match(/<h1\b/g) || []).length,
     1,
@@ -78,8 +79,8 @@ assert.ok(files.some((path) => path.endsWith("sitemap.xml")));
 assert.ok(files.some((path) => path.endsWith("robots.txt")));
 const headers = await readFile(join(root, "_headers"), "utf8");
 assert.ok(headers.includes("form-action 'none'"));
-assert.ok(headers.includes("connect-src 'none'"));
+assert.ok(headers.includes("connect-src https://script.google.com https://script.googleusercontent.com"));
 assert.ok(headers.includes("Content-Security-Policy"));
 console.log(
-  `PASS: ${pages} HTML pages; unique metadata, headings, internal links, assets, schema and collection-blocking security headers.`,
+  `PASS: ${pages} HTML pages; unique metadata, headings, internal links, assets, schema and security headers (forms limited to the Google Apps Script endpoint).`,
 );

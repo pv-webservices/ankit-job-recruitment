@@ -6,6 +6,18 @@ const STYLE =
 
 export const imageTasks = [
   {
+    id: "hero-hiring",
+    placement: "Homepage hero (full-bleed on desktop, framed image on mobile)",
+    alt: "An Indian recruiter shaking hands with a smiling candidate after a job interview, with other candidates waiting and a hiring panel in a bright modern office",
+    priority: "hero",
+    orientation: "landscape",
+    subjects: 3,
+    photoreal: true,
+    traits: ["complex-lighting"],
+    outputs: [{ suffix: "", width: 1600 }, { suffix: "-960", width: 960 }],
+    prompt: `Photorealistic wide hero photograph for an Indian recruitment and staffing company, showing a successful hiring moment. Positioned in the RIGHT 60% of the frame: a confident Indian female HR recruiter in a tailored navy blazer stands and warmly shakes hands with a happy young Indian male candidate in a crisp light-blue formal shirt holding a printed resume folder, both smiling; behind them, softly out of focus, a male hiring manager seated at a desk with a laptop and documents nods approvingly, and two young candidates in formal clothes wait on chairs. Bright modern corporate office interior with glass walls and warm daylight. All faces sharp, heads fully in frame with headroom, framed from mid-thigh up. The LEFT 40% of the frame is calm and darker: out-of-focus deep navy blue office wall with soft bokeh, suitable for website headline text. ${STYLE}`,
+  },
+  {
     id: "hero-kolkata",
     placement: "Homepage hero (full-bleed on desktop, framed image on mobile)",
     alt: "Three young Indian professionals — an office executive, a site technician and a customer-service executive — on a Kolkata riverfront at golden hour",
