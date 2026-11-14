@@ -42,6 +42,7 @@ test("validation rejects whitespace, future DOB, invalid contacts and mismatched
     qualification: "Graduate",
     dob: "2000-11-10",
     gender: "Prefer not to say",
+    country: "India",
     state: "West Bengal",
     district: "Kolkata",
     alternativeMobile: "",
@@ -81,4 +82,43 @@ test("validation rejects whitespace, future DOB, invalid contacts and mismatched
       districts,
     ).qualification,
   );
+});
+
+test("candidates outside India give a city instead of state/district and an international number", () => {
+  const districts = { "West Bengal": ["Kolkata"] };
+  const today = new Date(2026, 10, 10);
+  const abroad = {
+    name: "Sample Candidate",
+    fatherName: "Sample Father",
+    motherName: "Sample Mother",
+    mobile: "+971 50 123 4567",
+    email: "sample@example.com",
+    qualification: "Graduate",
+    dob: "2000-11-10",
+    gender: "Male",
+    country: "United Arab Emirates",
+    city: "Dubai",
+    consent: true,
+  };
+  assert.deepEqual(validateCandidate(abroad, districts, today), {});
+  const errors = validateCandidate({ ...abroad, city: " ", mobile: "12" }, districts, today);
+  assert.ok(errors.city);
+  assert.ok(errors.mobile);
+  assert.equal(errors.state, undefined);
+  assert.equal(errors.district, undefined);
+});
+
+test("country must come from the list and India still needs state and district", () => {
+  const districts = { "West Bengal": ["Kolkata"] };
+  const base = {
+    name: "A", fatherName: "B", motherName: "C", mobile: "8348623389",
+    email: "a@example.com", qualification: "ITI", dob: "2000-01-01",
+    gender: "Male", consent: true,
+  };
+  assert.ok(validateCandidate({ ...base, country: "Atlantis" }, districts).country);
+  assert.ok(validateCandidate({ ...base }, districts).country);
+  const india = validateCandidate({ ...base, country: "India" }, districts);
+  assert.ok(india.state);
+  assert.ok(india.district);
+  assert.equal(india.city, undefined);
 });

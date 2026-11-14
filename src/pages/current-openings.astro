@@ -6,22 +6,28 @@ import Icon from '../components/Icon.astro';
 import FAQ from '../components/FAQ.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import CareerCTA from '../components/CareerCTA.astro';
+import JobOpenings from '../components/JobOpenings.astro';
 import { business, careerSupport } from '../data/site';
+import { jobs } from '../data/jobs';
+const jobsCount = jobs.length;
 ---
-<Layout title="Current Openings" description="Explore career opportunities with Ankit Jobs & Staffing India. Register your details and enquire about job placement in Kolkata, Vizag and Odisha.">
-  <PageHero title="Your Next Job <em>Starts Here.</em>" crumb="Current Openings" eyebrow="Current openings" text="Share your qualifications, preferred location and career interests, and speak with the team about current job opportunities." image="placement" imageAlt="A candidate discussing a role with a recruiter">
-    <div class="button-row stack-sm"><Button href="/candidate-zone/">Register Your Details</Button><Button href={business.whatsapp} external variant="whatsapp" leadingIcon="whatsapp" icon={false}>Enquire About Jobs</Button></div>
+<Layout title="Current Openings" description="Current job openings for freshers in manufacturing and private banking — direct payroll, pan-India postings. Apply free with Ankit Jobs & Staffing India.">
+  <PageHero title="Your Next Job <em>Starts Here.</em>" crumb="Current Openings" eyebrow="Current openings" text="Urgent openings for freshers in manufacturing and private banking. Direct payroll, pan-India postings — and 100% free to apply." image="placement" imageAlt="A candidate discussing a role with a recruiter">
+    <div class="button-row stack-sm"><Button href="#openings-title">See Openings</Button><Button href={business.whatsapp} external variant="whatsapp" leadingIcon="whatsapp" icon={false}>Enquire About Jobs</Button></div>
   </PageHero>
 
-  <section class="section">
+  <section class="section" aria-labelledby="openings-title">
     <div class="container">
-      <div class="feature-panel" data-reveal>
-        <span class="icon-badge"><Icon name="briefcase" size={28}/></span>
-        <span class="status-pill">No vacancies published online yet</span>
-        <h2>Looking for Your Next Opportunity?</h2>
-        <p class="lead">Register your details so the team understands your profile, then call or WhatsApp to ask about current openings in Kolkata, Vizag and Odisha.</p>
-        <div class="button-row stack-sm"><Button href="/candidate-zone/">Register Your Details</Button><Button href={business.tel} variant="outline" leadingIcon="phone" icon={false}>Call <span class="num">{business.phone}</span></Button></div>
+      <div class="section-head split" data-reveal>
+        <div>
+          <span class="eyebrow">Hiring now</span>
+          <h2 id="openings-title">Current Job Openings</h2>
+          <p class="lead">Tap a poster to see full details, then apply in a minute. 100% free — no registration fee, no hidden charges.</p>
+        </div>
+        <span class="status-pill">{jobsCount} openings live</span>
       </div>
+      <JobOpenings/>
+      <p class="lead" style="margin-top:28px;text-align:center">Don’t see the right role? <a href="/candidate-zone/">Register your details</a> and we’ll contact you when a suitable job opens up.</p>
     </div>
   </section>
 

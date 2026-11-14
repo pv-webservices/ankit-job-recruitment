@@ -2,11 +2,17 @@
 import Brand from './Brand.astro';
 import Icon from './Icon.astro';
 import Button from './Button.astro';
-import { navigation, business } from '../data/site';
+import { navigation, business, socials, announcements } from '../data/site';
 const path = Astro.url.pathname;
 const isActive = (href: string) => path === href;
 ---
 <a class="skip-link" href="#main">Skip to content</a>
+<div class="announce" aria-label="Announcements">
+  <div class="announce-track">
+    <ul>{announcements.map((item) => <li>{item}</li>)}</ul>
+    <ul aria-hidden="true">{announcements.map((item) => <li>{item}</li>)}</ul>
+  </div>
+</div>
 <div class="topbar">
   <div class="container topbar-inner">
     <div class="topbar-group">
@@ -14,7 +20,10 @@ const isActive = (href: string) => path === href;
       <a href={business.tel}><Icon name="phone" size={14}/><span class="num">{business.phone}</span></a>
       <a href={`mailto:${business.email}`}><Icon name="mail" size={14}/>{business.email}</a>
     </div>
-    <em>Your Career, Our Mission</em>
+    <div class="topbar-group">
+      <em>Your Career, Our Mission</em>
+      <span class="topbar-social">{socials.map((s) => <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Follow us on ${s.label}`}><Icon name={s.key} size={15}/></a>)}</span>
+    </div>
   </div>
 </div>
 <header class="site-header" id="site-header">
@@ -57,6 +66,7 @@ const isActive = (href: string) => path === href;
   <div class="drawer-contact">
     <a href={`mailto:${business.email}`}><Icon name="mail" size={18}/>{business.email}</a>
     <span><Icon name="pin" size={18}/>Kolkata · Vizag · Odisha</span>
+    <div class="social-row drawer-social">{socials.map((s) => <a class={`social-btn ${s.key}`} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Follow us on ${s.label}`}><Icon name={s.key} size={19}/></a>)}</div>
   </div>
 </div>
 <div class="drawer-backdrop" data-drawer-close></div>

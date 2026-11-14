@@ -1,0 +1,36 @@
+---
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+import type { Job } from '../data/jobs';
+interface Props { job: Job; delay?: number; }
+const { job, delay = 0 } = Astro.props;
+const base = `/images/current-openings/${job.poster}`;
+const facts = [
+  { icon: 'pin', label: 'Location', value: job.location },
+  { icon: 'growth', label: 'Salary', value: job.salary },
+  { icon: 'award', label: 'Qualification', value: job.qualification },
+  { icon: 'user', label: 'Age / eligibility', value: job.age },
+];
+---
+<article class="job-card" id={job.slug} data-reveal style={`--delay:${delay}ms`}>
+  <button class="job-poster" type="button" data-poster={`${base}.webp`} data-poster-title={job.title} aria-label={`View full poster: ${job.title}`}>
+    <img src={`${base}-560.webp`} alt={`Job poster: ${job.title}`} width="560" height="840" loading="lazy" decoding="async"/>
+    <span class="job-tag">{job.tag}</span>
+    <span class="job-zoom"><Icon name="search" size={16}/>View poster</span>
+  </button>
+  <div class="job-body">
+    <span class="job-dept"><Icon name="briefcase" size={15}/>{job.department}</span>
+    <h3>{job.title}</h3>
+    <p class="job-company">{job.company}</p>
+    <dl class="job-facts">
+      {facts.map((f) => (
+        <div><dt><Icon name={f.icon} size={16}/><span>{f.label}</span></dt><dd>{f.value}</dd></div>
+      ))}
+    </dl>
+    <ul class="job-highlights">{job.highlights.map((h) => <li>{h}</li>)}</ul>
+    <div class="job-actions">
+      <Button href={`/candidate-zone/?job=${job.slug}#candidate-zone`}>Apply Now</Button>
+      <span class="job-free"><Icon name="check" size={15}/>100% free · No registration fee</span>
+    </div>
+  </div>
+</article>

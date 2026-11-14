@@ -5,11 +5,13 @@ import { qualifications, genders } from '../lib/registration.mjs';
 import districts from '../data/india-districts.json';
 import { business } from '../data/site';
 import { UPLOAD_ACCEPT } from '../lib/upload.mjs';
+import { countries, DEFAULT_COUNTRY } from '../lib/countries.mjs';
+import { jobTitles } from '../data/jobs';
 interface Props { id?: string; headingLevel?: 'h2' | 'h3'; }
 const { id = 'registration', headingLevel = 'h2' } = Astro.props;
 const Heading = headingLevel;
 type FieldType = 'text' | 'tel' | 'email' | 'select' | 'date' | 'file';
-interface Field { name: string; label: string; type: FieldType; placeholder?: string; autocomplete?: string; options?: string[]; readonly?: boolean; optional?: boolean; wide?: boolean; accept?: string; hint?: string; }
+interface Field { name: string; label: string; type: FieldType; placeholder?: string; autocomplete?: string; options?: string[]; readonly?: boolean; optional?: boolean; wide?: boolean; accept?: string; hint?: string; value?: string; hidden?: boolean; }
 const fields: Field[] = [
   { name: 'name', label: 'Full name', type: 'text', placeholder: 'Enter your full name', autocomplete: 'name' },
   { name: 'fatherName', label: 'Father’s name', type: 'text', placeholder: 'Enter father’s name', autocomplete: 'off' },
@@ -20,15 +22,18 @@ const fields: Field[] = [
   { name: 'dob', label: 'Date of birth', type: 'date', autocomplete: 'bday' },
   { name: 'age', label: 'Age on today', type: 'text', placeholder: 'Calculated from DOB', readonly: true },
   { name: 'gender', label: 'Gender', type: 'select', options: genders, placeholder: 'Select gender' },
+  { name: 'appliedFor', label: 'Job opening applying for', type: 'select', options: jobTitles, placeholder: 'General registration (any suitable job)', optional: true, wide: true },
+  { name: 'country', label: 'Country', type: 'select', options: countries, value: DEFAULT_COUNTRY, placeholder: 'Select country', autocomplete: 'country-name' },
   { name: 'state', label: 'State / UT', type: 'select', options: Object.keys(districts).sort(), placeholder: 'Select state / UT' },
   { name: 'district', label: 'District', type: 'select', options: [], placeholder: 'Select state first' },
+  { name: 'city', label: 'City / State', type: 'text', placeholder: 'e.g. Dubai', autocomplete: 'address-level2', hidden: true },
   { name: 'resume', label: 'Upload resume / CV', type: 'file', accept: UPLOAD_ACCEPT, hint: 'PDF, Word, JPG or PNG · max 5 MB', optional: true, wide: true },
   { name: 'alternativeMobile', label: 'Alternative mobile', type: 'tel', placeholder: 'Optional mobile number', autocomplete: 'off', optional: true },
 ];
 const groups = [
   { title: 'Personal information', names: ['name', 'fatherName', 'motherName', 'gender', 'dob', 'age'] },
   { title: 'Contact information', names: ['mobile', 'alternativeMobile', 'email'] },
-  { title: 'Education & location', names: ['qualification', 'state', 'district'] },
+  { title: 'Education & location', names: ['appliedFor', 'qualification', 'country', 'state', 'district', 'city'] },
   { title: 'Resume', names: ['resume'] },
 ];
 const byName = (name: string): Field => fields.find((field) => field.name === name)!;

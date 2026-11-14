@@ -34,5 +34,5 @@ lock for concurrent writes, and a 6-hour cache of submission IDs to ignore doubl
 ## Ownership
 
 The Sheet, script and Drive folder currently belong to the Google account that authorised the
-script. To move them to the business account, share/transfer the Sheet and Drive folder, then
-re-create the deployment from that account and update `formEndpoint`.
+script. To move them to the client's account, follow
+[GOOGLE-ACCOUNT-MIGRATION.md](./GOOGLE-ACCOUNT-MIGRATION.md).

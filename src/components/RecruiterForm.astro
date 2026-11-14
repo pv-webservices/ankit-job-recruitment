@@ -4,19 +4,21 @@ import FormField from './FormField.astro';
 import { recruiterServices, recruiterIndustries } from '../lib/recruiter.mjs';
 import { business } from '../data/site';
 import { UPLOAD_ACCEPT } from '../lib/upload.mjs';
+import { countries, DEFAULT_COUNTRY } from '../lib/countries.mjs';
 interface Props { id?: string; }
 const { id = 'recruiter' } = Astro.props;
 type FieldType = 'text' | 'tel' | 'email' | 'select' | 'number' | 'textarea' | 'file';
-interface Field { name: string; label: string; type: FieldType; placeholder?: string; autocomplete?: string; options?: string[]; optional?: boolean; wide?: boolean; accept?: string; hint?: string; }
+interface Field { name: string; label: string; type: FieldType; placeholder?: string; autocomplete?: string; options?: string[]; optional?: boolean; wide?: boolean; accept?: string; hint?: string; value?: string; }
 const groups: { title: string; fields: Field[] }[] = [
   { title: 'Company information', fields: [
     { name: 'companyName', label: 'Company name', type: 'text', placeholder: 'Registered company name', autocomplete: 'organization' },
     { name: 'industry', label: 'Industry', type: 'select', options: recruiterIndustries, placeholder: 'Select industry' },
     { name: 'contactPerson', label: 'Contact person', type: 'text', placeholder: 'Full name', autocomplete: 'name' },
     { name: 'designation', label: 'Designation', type: 'text', placeholder: 'e.g. HR Manager', autocomplete: 'organization-title' },
+    { name: 'country', label: 'Country', type: 'select', options: countries, value: DEFAULT_COUNTRY, placeholder: 'Select country', autocomplete: 'country-name' },
   ] },
   { title: 'Contact information', fields: [
-    { name: 'mobile', label: 'Mobile number', type: 'tel', placeholder: '10-digit mobile number', autocomplete: 'tel-national' },
+    { name: 'mobile', label: 'Mobile number', type: 'tel', placeholder: 'Mobile number (with country code if outside India)', autocomplete: 'tel' },
     { name: 'email', label: 'Business email', type: 'email', placeholder: 'hr@company.com', autocomplete: 'email' },
   ] },
   { title: 'Hiring requirement', fields: [

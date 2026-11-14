@@ -1,3 +1,5 @@
+import { countries, isIndia, isInternationalPhone } from "./countries.mjs";
+
 export const qualifications = [
   "Secondary",
   "Higher Secondary",
@@ -38,9 +40,16 @@ export function isIndianMobile(value) {
   return /^(?:\+?91)?[6-9]\d{9}$/.test(value.replace(/[\s()-]/g, ""));
 }
 
+/** Indian numbers for India; any valid international number elsewhere. */
+export function isValidMobile(value, country) {
+  return isIndia(country) ? isIndianMobile(value) : isInternationalPhone(value);
+}
+
 export function validateCandidate(data, districts, today = new Date()) {
   /** @type {Record<string, string>} */
   const errors = {};
+  const country = data.country || "";
+  const inIndia = isIndia(country);
   for (const [field, label] of [
     ["name", "your name"],
     ["fatherName", "your father’s name"],
@@ -49,8 +58,10 @@ export function validateCandidate(data, districts, today = new Date()) {
     if (!data[field]?.trim() || data[field].trim().length > 100)
       errors[field] = `Enter ${label} (up to 100 characters).`;
   }
-  if (!isIndianMobile(data.mobile || ""))
-    errors.mobile = "Enter a valid 10-digit Indian mobile number.";
+  if (!isValidMobile(data.mobile || "", country))
+    errors.mobile = inIndia
+      ? "Enter a valid 10-digit Indian mobile number."
+      : "Enter a valid mobile number with country code.";
   if (
     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || "") ||
     data.email.length > 254
@@ -61,14 +72,23 @@ export function validateCandidate(data, districts, today = new Date()) {
   if (ageOnDate(data.dob || "", today) === null)
     errors.dob = "Enter a valid date of birth that is not in the future.";
   if (!genders.includes(data.gender)) errors.gender = "Select a gender option.";
-  if (!Object.hasOwn(districts, data.state || ""))
-    errors.state = "Select your state or union territory.";
+  if (!countries.includes(country)) errors.country = "Select your country.";
+  else if (inIndia) {
+    if (!Object.hasOwn(districts, data.state || ""))
+      errors.state = "Select your state or union territory.";
+    if (
+      !Object.hasOwn(districts, data.state || "") ||
+      !districts[data.state].includes(data.district)
+    )
+      errors.district = "Select a district in your chosen state.";
+  } else if (!data.city?.trim() || data.city.trim().length > 100)
+    errors.city = "Enter your city / state (up to 100 characters).";
+  if ((data.appliedFor ?? "").length > 100)
+    errors.appliedFor = "Select a job opening, or leave it blank.";
   if (
-    !Object.hasOwn(districts, data.state || "") ||
-    !districts[data.state].includes(data.district)
+    data.alternativeMobile?.trim() &&
+    !isValidMobile(data.alternativeMobile, country)
   )
-    errors.district = "Select a district in your chosen state.";
-  if (data.alternativeMobile?.trim() && !isIndianMobile(data.alternativeMobile))
     errors.alternativeMobile =
       "Enter a valid alternative mobile number, or leave it blank.";
   if (!data.consent)

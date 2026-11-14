@@ -1,4 +1,5 @@
-import { isIndianMobile } from "./registration.mjs";
+import { isValidMobile } from "./registration.mjs";
+import { countries, isIndia } from "./countries.mjs";
 
 export const recruiterServices = [
   "Manpower Recruitment",
@@ -37,8 +38,12 @@ export function validateRecruiter(data) {
     if (!value || value.length > MAX_TEXT)
       errors[field] = `Enter ${label} (up to ${MAX_TEXT} characters).`;
   }
-  if (!isIndianMobile(data.mobile || ""))
-    errors.mobile = "Enter a valid 10-digit Indian mobile number.";
+  if (!countries.includes(data.country))
+    errors.country = "Select the company’s country.";
+  if (!isValidMobile(data.mobile || "", data.country))
+    errors.mobile = isIndia(data.country)
+      ? "Enter a valid 10-digit Indian mobile number."
+      : "Enter a valid mobile number with country code.";
   if (
     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || "") ||
     data.email.length > 254

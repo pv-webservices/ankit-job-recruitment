@@ -1,0 +1,31 @@
+---
+import JobCard from './JobCard.astro';
+import Icon from './Icon.astro';
+import { jobs } from '../data/jobs';
+interface Props { limit?: number; }
+const { limit } = Astro.props;
+const list = limit ? jobs.slice(0, limit) : jobs;
+---
+<div class="job-grid">
+  {list.map((job, i) => <JobCard job={job} delay={i * 90}/>)}
+</div>
+<dialog class="poster-dialog" aria-label="Job poster">
+  <form method="dialog"><button class="poster-close" type="submit" aria-label="Close poster"><Icon name="cross" size={22}/></button></form>
+  <img src="" alt="" width="1024" height="1536" decoding="async"/>
+</dialog>
+<script>
+  // Opens the full-size poster in a native <dialog>; click outside or Esc closes it.
+  const dialog = document.querySelector<HTMLDialogElement>(".poster-dialog");
+  const img = dialog?.querySelector("img");
+  document.querySelectorAll<HTMLButtonElement>("[data-poster]").forEach((button) => {
+    button.addEventListener("click", () => {
+      if (!dialog || !img) return;
+      img.src = button.dataset.poster ?? "";
+      img.alt = `Job poster: ${button.dataset.posterTitle ?? ""}`;
+      dialog.showModal();
+    });
+  });
+  dialog?.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+</script>

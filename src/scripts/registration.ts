@@ -5,6 +5,8 @@ import {
   validateCandidate,
 } from "../lib/registration.mjs";
 import { validateUpload } from "../lib/upload.mjs";
+import { isIndia } from "../lib/countries.mjs";
+import { jobs } from "../data/jobs";
 import { attachFileLabels, newSubmissionId, runSubmission } from "./submit";
 const districtMap: Record<string, string[]> = districts;
 document
@@ -33,6 +35,30 @@ document
         district.add(new Option(name, name));
       district.disabled = !field("state").value;
     });
+    // India uses the State / District dropdowns; other countries type a city.
+    const mobile = field("mobile") as HTMLInputElement;
+    const indianPlaceholder = mobile.placeholder;
+    function setFieldVisible(name: string, visible: boolean) {
+      const control = field(name);
+      control.closest<HTMLElement>(".form-field")!.hidden = !visible;
+      control.disabled = !visible;
+    }
+    function updateCountry() {
+      const inIndia = isIndia(field("country").value);
+      setFieldVisible("state", inIndia);
+      setFieldVisible("district", inIndia);
+      if (inIndia) field("district").disabled = !field("state").value;
+      setFieldVisible("city", !inIndia);
+      mobile.placeholder = inIndia ? indianPlaceholder : "Mobile with country code, e.g. +971…";
+    }
+    field("country").addEventListener("change", updateCountry);
+    updateCountry();
+
+    // "Apply Now" links pass ?job=<slug> so the opening is pre-selected.
+    const jobSlug = new URLSearchParams(location.search).get("job");
+    const job = jobs.find((j) => j.slug === jobSlug);
+    if (job) field("appliedFor").value = job.title;
+
     function validate() {
       updateDate();
       const data = Object.fromEntries(new FormData(form));
@@ -78,6 +104,7 @@ document
         const district = field("district") as HTMLSelectElement;
         district.replaceChildren(new Option("Select state first", ""));
         district.disabled = true;
+        updateCountry();
         updateDate();
       }
       validating = false;

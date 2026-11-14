@@ -18,17 +18,19 @@ var FORMS = {
   candidate: {
     sheet: 'Candidates',
     folder: 'Candidate Resumes',
-    fields: ['name', 'fatherName', 'motherName', 'gender', 'dob', 'age', 'mobile', 'alternativeMobile', 'email', 'qualification', 'state', 'district'],
-    headers: ['Full name', 'Father name', 'Mother name', 'Gender', 'Date of birth', 'Age', 'Mobile', 'Alternative mobile', 'Email', 'Qualification', 'State', 'District'],
-    required: ['name', 'fatherName', 'motherName', 'gender', 'dob', 'mobile', 'email', 'qualification', 'state', 'district'],
+    fields: ['name', 'fatherName', 'motherName', 'gender', 'dob', 'age', 'mobile', 'alternativeMobile', 'email', 'qualification', 'appliedFor', 'country', 'state', 'district', 'city'],
+    headers: ['Full name', 'Father name', 'Mother name', 'Gender', 'Date of birth', 'Age', 'Mobile', 'Alternative mobile', 'Email', 'Qualification', 'Applied for', 'Country', 'State', 'District', 'City (outside India)'],
+    required: ['name', 'fatherName', 'motherName', 'gender', 'dob', 'mobile', 'email', 'qualification', 'country'],
+    // India needs state + district; every other country needs a city.
+    requiredByCountry: function (data) { return clean(data.country) === 'India' ? ['state', 'district'] : ['city']; },
     fileLabel: 'Resume (Drive link)'
   },
   recruiter: {
     sheet: 'Recruiters',
     folder: 'Recruiter Job Descriptions',
-    fields: ['companyName', 'industry', 'contactPerson', 'designation', 'mobile', 'email', 'service', 'jobRole', 'openings', 'jobLocation', 'details'],
-    headers: ['Company', 'Industry', 'Contact person', 'Designation', 'Mobile', 'Email', 'Service required', 'Job role', 'Openings', 'Job location', 'Requirement details'],
-    required: ['companyName', 'industry', 'contactPerson', 'designation', 'mobile', 'email', 'service', 'jobRole', 'openings', 'jobLocation'],
+    fields: ['companyName', 'industry', 'contactPerson', 'designation', 'country', 'mobile', 'email', 'service', 'jobRole', 'openings', 'jobLocation', 'details'],
+    headers: ['Company', 'Industry', 'Contact person', 'Designation', 'Country', 'Mobile', 'Email', 'Service required', 'Job role', 'Openings', 'Job location', 'Requirement details'],
+    required: ['companyName', 'industry', 'contactPerson', 'designation', 'country', 'mobile', 'email', 'service', 'jobRole', 'openings', 'jobLocation'],
     fileLabel: 'Job description (Drive link)'
   }
 };
@@ -50,8 +52,9 @@ function doPost(e) {
     if (submissionId && cache.get(submissionId)) return json({ ok: true, ref: cache.get(submissionId) });
 
     var data = body.fields || {};
-    for (var i = 0; i < form.required.length; i++) {
-      if (!clean(data[form.required[i]])) return json({ ok: false, error: 'Please complete all required fields.' });
+    var required = form.required.concat(form.requiredByCountry ? form.requiredByCountry(data) : []);
+    for (var i = 0; i < required.length; i++) {
+      if (!clean(data[required[i]])) return json({ ok: false, error: 'Please complete all required fields.' });
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean(data.email))) return json({ ok: false, error: 'Please enter a valid email.' });
 

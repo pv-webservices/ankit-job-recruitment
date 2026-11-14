@@ -8,6 +8,7 @@ const valid = {
   designation: "HR Manager",
   mobile: "+91 98765 43210",
   email: "hr@acme.example",
+  country: "India",
   industry: "Manufacturing & Industrial",
   service: "Staffing Services",
   jobRole: "Machine Operator",
@@ -42,4 +43,10 @@ test("openings must be a whole number between 1 and 10000", () => {
 test("optional details are limited to 1000 characters", () => {
   assert.ok(validateRecruiter({ ...valid, details: "a".repeat(1001) }).details);
   assert.equal(validateRecruiter({ ...valid, details: "a".repeat(1000) }).details, undefined);
+});
+
+test("country is required and overseas recruiters may use an international number", () => {
+  assert.ok(validateRecruiter({ ...valid, country: "" }).country);
+  assert.deepEqual(validateRecruiter({ ...valid, country: "Qatar", mobile: "+974 3312 3456" }), {});
+  assert.ok(validateRecruiter({ ...valid, country: "India", mobile: "+974 3312 3456" }).mobile);
 });

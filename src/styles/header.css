@@ -413,6 +413,7 @@
 /* ---------- Footer social + floating Call ---------- */
 .footer-social {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 18px;
 }

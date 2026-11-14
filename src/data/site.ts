@@ -4,9 +4,24 @@ export const business = {
   tel: "tel:+918348623389",
   email: "ankitjobs99@gmail.com",
   whatsapp: "https://wa.me/918348623389",
-  // TODO: replace with the business's own Facebook page URL once supplied.
-  facebook: "https://www.facebook.com/",
 };
+
+export const socials = [
+  { key: "youtube", label: "YouTube", href: "https://www.youtube.com/@AnkitJobsStaffingINDIA" },
+  { key: "instagram", label: "Instagram", href: "https://www.instagram.com/ankit_jobs_staffing_india" },
+  { key: "facebook", label: "Facebook", href: "https://www.facebook.com/share/1CVS9S9vps/" },
+  { key: "x", label: "X (Twitter)", href: "https://x.com/AnkitJobs99" },
+];
+
+export const announcements = [
+  "No hidden charges",
+  "No registration fee",
+  "100% free recruitment for candidates",
+  "Urgent openings for freshers — apply now",
+  "Direct company payroll jobs",
+  "Pan-India placements in manufacturing & banking",
+  "Call / WhatsApp +91 8348623389",
+];
 // Google Apps Script web app that writes to the Google Sheet + Drive.
 // Public by design (it is called from the browser); see google-apps-script/Code.gs.
 export const formEndpoint: string =
@@ -118,7 +133,7 @@ export const faqs = [
   },
   {
     q: "How can I enquire about current vacancies?",
-    a: "Visit the Career page and contact the team for current information. No verified live vacancies have been supplied for publication yet.",
+    a: "See the Current Openings page for live vacancies. Tap “Apply Now” on any job card, or call / WhatsApp the team for more details.",
   },
   {
     q: "Does registration guarantee a job?",
@@ -126,7 +141,7 @@ export const faqs = [
   },
   {
     q: "Are there any registration or service fees?",
-    a: "A fee policy has not been supplied for this website. Ask the team for the applicable terms before making any commitment or payment.",
+    a: "No. Recruitment is 100% free for candidates — there is no registration fee and no hidden charges.",
   },
 ];
 
