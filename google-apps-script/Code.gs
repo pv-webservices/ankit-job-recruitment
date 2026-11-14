@@ -4,6 +4,10 @@
 // Candidate and recruiter submissions are appended as rows; uploaded files are
 // saved privately to a Drive folder and linked from the row.
 
+// Leave empty when the script is bound to the Sheet (Extensions > Apps Script).
+// For a standalone project (script.google.com > New project), paste the Sheet ID
+// from its URL: docs.google.com/spreadsheets/d/<SHEET ID>/edit
+var SPREADSHEET_ID = '';
 var MAX_FILE_BYTES = 5 * 1024 * 1024;
 var MAX_TEXT = 1000;
 var ROOT_FOLDER_NAME = 'Ankit Jobs - Website Uploads';
@@ -87,8 +91,12 @@ function saveFile(file, form, ref, owner) {
   return saved.getUrl();
 }
 
+function getBook() {
+  return SPREADSHEET_ID ? SpreadsheetApp.openById(SPREADSHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
+}
+
 function getSheet(form) {
-  var book = SpreadsheetApp.getActiveSpreadsheet();
+  var book = getBook();
   var sheet = book.getSheetByName(form.sheet) || book.insertSheet(form.sheet);
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(['Submitted at', 'Reference'].concat(form.headers, [form.fileLabel]));
@@ -125,9 +133,10 @@ function setup() {
   getSheet(FORMS.recruiter);
   getFolder(FORMS.candidate.folder);
   getFolder(FORMS.recruiter.folder);
-  var first = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
-  if (first && first.getLastRow() === 0 && SpreadsheetApp.getActiveSpreadsheet().getSheets().length > 2) {
-    SpreadsheetApp.getActiveSpreadsheet().deleteSheet(first);
+  var book = getBook();
+  var first = book.getSheetByName('Sheet1');
+  if (first && first.getLastRow() === 0 && book.getSheets().length > 2) {
+    book.deleteSheet(first);
   }
 }
 

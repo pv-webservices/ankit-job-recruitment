@@ -31,6 +31,12 @@ Apps Script often breaks when a browser is signed in to several Google accounts 
 3. Click the project name ("Untitled project") and rename it to **Ankit Jobs form receiver**.
 4. Click **Save** (💾).
 
+> **If "Extensions → Apps Script" shows "Sorry, unable to open the file"** (common when Chrome is
+> signed in to several Google accounts), create a standalone project instead: open
+> `https://script.google.com/u/<account number>/home` and choose **New project**. Paste `Code.gs`,
+> then set `SPREADSHEET_ID` at the top to the Sheet's ID (the part between `/d/` and `/edit` in the
+> Sheet's URL). Everything else is the same. This is how the client's live setup was done.
+
 ## 4. Run setup once (creates the tabs and the Drive folder)
 
 1. In the function dropdown at the top, choose **`setup`**, then click **Run**.

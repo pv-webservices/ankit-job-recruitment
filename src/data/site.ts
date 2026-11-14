@@ -26,7 +26,7 @@ export const announcements = [
 // Public by design (it is called from the browser); see google-apps-script/Code.gs.
 export const formEndpoint: string =
   import.meta.env.PUBLIC_FORM_ENDPOINT ||
-  "https://script.google.com/macros/s/AKfycbwQ9mtbqJn_pwtEWdd1itmFbEDUGb22dzkU9XEbv05kB_Lv222KgFWRCwLP74prYjlX/exec";
+  "https://script.google.com/macros/s/AKfycbxcZq8boHy1LHjt4U7lnI1sYjti280u30TknJLeV3gifRERIVKWcfEDaT9VbiWGCcjh/exec";
 
 export const navigation = [
   ["Home", "/"],
