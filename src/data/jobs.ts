@@ -1,6 +1,6 @@
 // Current openings shown on the homepage and the Current Openings page.
 // To add a job: drop its poster into public/images/current-openings/, create
-// the -560.webp thumbnail and .webp full-size copies, and add an entry here.
+// the -640.webp thumbnail and .webp full-size copies, and add an entry here.
 export interface Job {
   slug: string;
   title: string;
@@ -17,43 +17,30 @@ export interface Job {
 
 export const jobs: Job[] = [
   {
-    slug: "manufacturing-freshers",
-    title: "Production Jobs for Freshers",
-    company: "Reputed manufacturing company · Direct company payroll",
-    tag: "Urgent requirement",
-    poster: "current-opening-1",
+    slug: "private-banking-freshers",
+    title: "Private Banking & Finance Jobs for Freshers",
+    company: "ICICI, Axis, HDFC, Yes Bank, IDFC First & more leading banks · Direct payroll",
+    tag: "Direct payroll",
+    poster: "new-current-opening-1",
+    location: "Pan India — posting in your own state",
+    salary: "₹3.5 – ₹8 lakh per annum + incentives",
+    qualification: "Any graduate / MBA / BBA / BCA, 50%+ throughout",
+    age: "Maximum 28 years · Male & female",
+    department: "Operations / Sales",
+    highlights: ["Assistant Manager", "Associate RM", "BDM", "Cashier", "PF + ESI"],
+  },
+  {
+    slug: "manufacturing-bulk-hiring",
+    title: "Bulk Hiring for Freshers — Manufacturing",
+    company: "Reputed manufacturing company · Direct company payroll · 2024 / 25 / 26 batch only",
+    tag: "Bulk hiring",
+    poster: "new-current-opening-2",
     location: "Gujarat, Nashik, Pune, Haryana, Bangalore, Delhi, Chennai, Baddi — open to all of India",
     salary: "₹18,000 – ₹25,000 CTC",
     qualification: "ITI / 10th / 12th / Diploma / B.Tech (any trade)",
     age: "Below 28 years · Male & female",
-    department: "Production",
-    highlights: ["PF & ESI", "Accommodation", "Canteen", "Transport", "Bonus & overtime"],
-  },
-  {
-    slug: "private-bank-freshers",
-    title: "Private Bank Jobs for Freshers",
-    company: "Top private banks · Direct payroll",
-    tag: "Freshers welcome",
-    poster: "current-opening-2",
-    location: "Pan India — posting in your own state",
-    salary: "₹3.5 – ₹8 lakh per annum",
-    qualification: "Any graduate / MBA / BBA / BCA, 50%+ throughout",
-    age: "Maximum 28 years · Male & female",
-    department: "Operations / Sales",
-    highlights: ["Assistant Manager", "Relationship Manager", "BDM", "Cashier", "PF + ESI"],
-  },
-  {
-    slug: "banking-finance-direct-payroll",
-    title: "Banking & Finance — Direct Payroll Jobs",
-    company: "ICICI, Axis, HDFC, Yes Bank & more leading banks",
-    tag: "Direct payroll",
-    poster: "current-opening-3",
-    location: "Pan India — posting in your own state",
-    salary: "₹3.5 – ₹8 lakh per annum + incentives",
-    qualification: "Any graduate / MBA / BBA / BCA, good communication & computer skills",
-    age: "Maximum 28 years · Male & female",
-    department: "Operations / Sales",
-    highlights: ["Assistant Manager", "Associate RM", "BDM", "Cashier", "Growth opportunities"],
+    department: "Production / Maintenance / Quality",
+    highlights: ["PF & ESI", "Accommodation", "Canteen", "Transport", "Bonus & overtime", "Gratuity"],
   },
 ];
 

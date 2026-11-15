@@ -11,6 +11,7 @@ export const socials = [
   { key: "instagram", label: "Instagram", href: "https://www.instagram.com/ankit_jobs_staffing_india" },
   { key: "facebook", label: "Facebook", href: "https://www.facebook.com/share/1CVS9S9vps/" },
   { key: "x", label: "X (Twitter)", href: "https://x.com/AnkitJobs99" },
+  { key: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/ankit-rai-960aa844b?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
 ];
 
 export const announcements = [

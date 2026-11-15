@@ -14,7 +14,7 @@ const facts = [
 ---
 <article class="job-card" id={job.slug} data-reveal style={`--delay:${delay}ms`}>
   <button class="job-poster" type="button" data-poster={`${base}.webp`} data-poster-title={job.title} aria-label={`View full poster: ${job.title}`}>
-    <img src={`${base}-560.webp`} alt={`Job poster: ${job.title}`} width="560" height="840" loading="lazy" decoding="async"/>
+    <img src={`${base}-640.webp`} srcset={`${base}-640.webp 640w, ${base}.webp 1200w`} sizes="(min-width: 900px) 440px, 100vw" alt={`Job poster: ${job.title}`} width="640" height="640" loading="lazy" decoding="async"/>
     <span class="job-tag">{job.tag}</span>
     <span class="job-zoom"><Icon name="search" size={16}/>View poster</span>
   </button>

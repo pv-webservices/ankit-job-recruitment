@@ -29,25 +29,21 @@
 }
 
 /* ---------- Brand lockup ----------
-   One size variable drives everything: the wordmark column is exactly the
-   badge height, and the tagline + swoosh span the full lockup width. */
+   Badge | vertical divider | text column. One size variable (--logo-h)
+   drives everything: the badge and the text column share that height,
+   and the tagline + swoosh sit under the wordmark only. */
 .brand {
-  --logo-h: 60px;
-  display: inline-grid;
-  grid-template-columns: max-content;
-  justify-items: stretch;
+  --logo-h: 70px;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--logo-h) * 0.16);
   flex-shrink: 0;
   min-width: 0;
   color: var(--navy-800);
   text-decoration: none;
   line-height: 1;
 }
-.brand-top {
-  display: flex;
-  align-items: stretch;
-  gap: calc(var(--logo-h) * 0.18);
-}
-.brand img {
+.brand-badge {
   width: var(--logo-h);
   height: var(--logo-h);
   flex-shrink: 0;
@@ -55,23 +51,31 @@
   filter: drop-shadow(0 3px 8px rgb(3 20 46 / 0.25));
   transition: transform 500ms var(--ease-out);
 }
-.brand:hover img {
+.brand:hover .brand-badge {
   transform: rotate(-6deg) scale(1.05);
 }
-.brand-words {
-  /* Wordmark is 85% of the badge height, centred beside it. */
-  --word-h: calc(var(--logo-h) * 0.85);
+.brand-divider {
+  flex-shrink: 0;
+  align-self: stretch;
+  width: 2px;
+  margin-block: calc(var(--logo-h) * 0.04);
+  border-radius: 2px;
+  background: linear-gradient(180deg, transparent, var(--navy-800) 18%, var(--navy-800) 82%, transparent);
+}
+.brand-text {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  align-self: center;
-  height: var(--word-h);
+  align-items: stretch;
+  min-height: var(--logo-h);
+  justify-content: center;
   font-family: var(--font-display);
   white-space: nowrap;
 }
+.brand-text > * {
+  flex-shrink: 0;
+}
 .brand-line {
-  font-size: calc(var(--word-h) * 0.44);
+  font-size: calc(var(--logo-h) * 0.33);
   font-weight: 800;
   font-stretch: 92%;
   letter-spacing: -0.025em;
@@ -83,15 +87,17 @@
 }
 .brand-pill {
   position: relative;
+  align-self: flex-start;
   overflow: hidden;
-  padding: calc(var(--word-h) * 0.04) calc(var(--word-h) * 0.2) calc(var(--word-h) * 0.055);
+  margin-top: calc(var(--logo-h) * 0.035);
+  padding: calc(var(--logo-h) * 0.025) calc(var(--logo-h) * 0.14) calc(var(--logo-h) * 0.035);
   border: 2px solid var(--gold-400);
   border-radius: var(--r-pill);
   background: linear-gradient(135deg, var(--navy-950), var(--navy-800) 60%, var(--navy-700));
   box-shadow:
     0 3px 10px rgb(3 20 46 / 0.22),
     inset 0 1px 0 rgb(255 255 255 / 0.15);
-  font-size: calc(var(--word-h) * 0.34);
+  font-size: calc(var(--logo-h) * 0.27);
   font-weight: 800;
   font-stretch: 92%;
   letter-spacing: -0.015em;
@@ -117,16 +123,15 @@
 .brand-tagline {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: calc(var(--logo-h) * 0.1);
+  gap: 5px;
+  margin-top: calc(var(--logo-h) * 0.06);
   color: var(--navy-800);
   font-family: var(--font-body);
-  font-size: calc(var(--logo-h) * 0.205);
+  font-size: calc(var(--logo-h) * 0.15);
   font-style: italic;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.01em;
   line-height: 1;
-  white-space: nowrap;
 }
 .brand-tagline::before,
 .brand-tagline::after {
@@ -141,7 +146,7 @@
 .brand-swoosh {
   display: block;
   width: 100%;
-  height: calc(var(--logo-h) * 0.1);
+  height: calc(var(--logo-h) * 0.08);
   margin-top: calc(var(--logo-h) * 0.03);
   overflow: visible;
 }
@@ -176,6 +181,10 @@
 .brand-footer .brand-tagline,
 .brand-drawer .brand-tagline {
   color: var(--gold-300);
+}
+.brand-footer .brand-divider,
+.brand-drawer .brand-divider {
+  background: linear-gradient(180deg, transparent, var(--gold-400) 18%, var(--gold-400) 82%, transparent);
 }
 .brand-footer .brand-pill,
 .brand-drawer .brand-pill {
@@ -393,7 +402,7 @@
 }
 @media (max-width: 899px) {
   .site-header .brand {
-    --logo-h: 46px;
+    --logo-h: 52px;
   }
 }
 @media (max-width: 419px) {
@@ -401,7 +410,7 @@
     gap: 8px;
   }
   .site-header .brand {
-    --logo-h: 38px;
+    --logo-h: 46px;
   }
   .header-mobile-actions .social-btn,
   .menu-toggle {
@@ -414,8 +423,12 @@
 .footer-social {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   margin-top: 18px;
+}
+.footer-social .social-btn {
+  width: 42px;
+  height: 42px;
 }
 .social-btn.whatsapp {
   background: var(--whatsapp);

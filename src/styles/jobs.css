@@ -1,24 +1,16 @@
 /* Current openings: job cards, poster viewer, announcement bar, social icons. */
 
-/* ---------- Job cards ---------- */
+/* ---------- Job cards ----------
+   Horizontal (poster | details) on desktop, stacked on mobile. Posters are
+   shown whole at their natural square ratio — never cropped. */
 .job-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 2.4vw, 28px);
-}
-@media (max-width: 1099px) {
-  .job-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media (max-width: 679px) {
-  .job-grid {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(20px, 2.6vw, 32px);
 }
 .job-card {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
@@ -29,13 +21,24 @@
     transform var(--dur) var(--ease-out),
     box-shadow var(--dur) var(--ease-out);
 }
+@media (min-width: 900px) {
+  .job-card {
+    grid-template-columns: minmax(300px, 440px) minmax(0, 1fr);
+    align-items: stretch;
+  }
+  .job-card .job-poster {
+    border-right: 1px solid var(--line);
+  }
+}
 .job-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-md);
 }
 .job-poster {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   padding: 0;
   border: 0;
@@ -46,13 +49,13 @@
 .job-poster img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3.4;
-  object-fit: cover;
-  object-position: 50% 0;
-  transition: transform var(--dur-slow) var(--ease-out);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  transition: filter var(--dur) var(--ease-out);
 }
 .job-poster:hover img {
-  transform: scale(1.04);
+  filter: brightness(1.04) saturate(1.05);
 }
 .job-poster:focus-visible {
   outline: 3px solid var(--gold-400);
@@ -89,9 +92,8 @@
 }
 .job-body {
   display: flex;
-  flex: 1;
   flex-direction: column;
-  padding: clamp(20px, 2.4vw, 28px);
+  padding: clamp(20px, 2.8vw, 36px);
 }
 .job-dept {
   display: inline-flex;
@@ -172,6 +174,19 @@
   width: 100%;
   justify-content: center;
 }
+@media (min-width: 900px) {
+  .job-actions {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 18px;
+  }
+  .job-actions .button {
+    width: auto;
+  }
+  .job-actions .job-free {
+    justify-content: flex-start;
+  }
+}
 .job-free {
   display: inline-flex;
   align-items: center;
@@ -184,7 +199,7 @@
 
 /* ---------- Poster viewer ---------- */
 .poster-dialog {
-  max-width: min(560px, 94vw);
+  max-width: min(760px, 94vw, 92vh);
   max-height: 94vh;
   padding: 0;
   border: 0;
@@ -226,7 +241,7 @@
 .announce {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(90deg, var(--red-500), #e0331f 50%, var(--red-500));
+  background: linear-gradient(90deg, var(--navy-700), var(--blue-600) 50%, var(--navy-700));
   color: var(--white);
   font-size: var(--fs-xs);
   font-weight: 600;
@@ -236,9 +251,6 @@
   display: flex;
   width: max-content;
   animation: marquee 45s linear infinite;
-}
-.announce:hover .announce-track {
-  animation-play-state: paused;
 }
 .announce ul {
   display: flex;
@@ -287,6 +299,9 @@
 }
 .social-btn.instagram {
   background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+}
+.social-btn.linkedin {
+  background: #0a66c2;
 }
 .social-btn.x {
   background: #000;
