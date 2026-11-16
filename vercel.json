@@ -3,9 +3,9 @@
   "trailingSlash": true,
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.ankitjobs.in" }],
-      "destination": "https://ankitjobs.in/:path*",
+      "destination": "https://ankitjobs.in/$1",
       "permanent": true
     },
     { "source": "/index.html", "destination": "/", "permanent": true },
