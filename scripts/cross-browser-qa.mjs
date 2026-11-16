@@ -27,6 +27,8 @@ for (const [name, engine, options] of [
   const browser = await engine.launch({ ...options, headless: true });
   try {
     const page = await browser.newPage({ reducedMotion: "reduce" });
+    // Safety: never reach the live Google Apps Script form endpoint.
+    await page.route(/^https:\/\/script\.(google|googleusercontent)\.com\//, (route) => route.abort());
     const errors = [];
     page.on("pageerror", (error) => errors.push(error.message));
     for (const route of routes) {

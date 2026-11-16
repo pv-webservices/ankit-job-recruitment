@@ -11,7 +11,7 @@ import { business, reasons, locations, services, industries } from '../data/site
 const marquee = ['Career Placement', 'Job Opportunities', 'Candidate Registration', 'Kolkata', 'Vizag', 'Odisha', 'Your Career, Our Mission'];
 const heroAlt = "An HR recruiter shaking hands with a selected candidate after a job interview, with the hiring manager and other candidates in the background";
 ---
-<Layout title="Recruitment & Staffing in Kolkata, Vizag & Odisha" description="Ankit Jobs & Staffing India connects job seekers with career opportunities — candidate registration and job placement support in Kolkata, Vizag and Odisha." preloadImage={{ href: '/images/hero-hiring.webp', srcset: '/images/hero-hiring-960.webp 960w, /images/hero-hiring.webp 1536w', sizes: '(max-width: 899px) 100vw, 64vw' }}>
+<Layout brandFirst title="Recruitment in Kolkata, Vizag & Odisha" description="Ankit Jobs & Staffing India connects job seekers with career opportunities — candidate registration and job placement support in Kolkata, Vizag and Odisha." preloadImage={{ href: '/images/hero-hiring.webp', srcset: '/images/hero-hiring-960.webp 960w, /images/hero-hiring.webp 1536w', sizes: '(max-width: 899px) 100vw, 64vw' }}>
 
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
@@ -34,7 +34,7 @@ const heroAlt = "An HR recruiter shaking hands with a selected candidate after a
         <ul class="hero-trust">
           <li><Icon name="users" size={20}/>For job seekers</li>
           <li><Icon name="pin" size={20}/>Kolkata · Vizag · Odisha</li>
-          <li><Icon name="phone" size={20}/><a href={business.tel} style="color:inherit;text-decoration:none"><span class="num">{business.phone}</span></a></li>
+          <li><Icon name="phone" size={20}/><a class="hero-trust-link" href={business.tel}><span class="num">{business.phone}</span></a></li>
         </ul>
       </div>
     </div>
@@ -86,7 +86,7 @@ const heroAlt = "An HR recruiter shaking hands with a selected candidate after a
               <span class:list={['icon-badge', { navy: i % 2 === 1 }]}><Icon name={s.icon} size={24}/></span>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
-              <a class="text-link" href={`/our-services/#${s.slug}`}>Learn more <Icon name="arrow" size={16}/></a>
+              <a class="text-link" href={`/our-services/#${s.slug}`}>Learn more<span class="sr-only"> about {s.title}</span> <Icon name="arrow" size={16}/></a>
             </div>
           </article>
         ))}
@@ -144,7 +144,7 @@ const heroAlt = "An HR recruiter shaking hands with a selected candidate after a
       <div class="process-intro" data-reveal>
         <span class="eyebrow">How it works</span>
         <h2 id="process-title">A Simple, Transparent Path to <span class="text-blue">Your Next Job</span></h2>
-        <p class="lead" style="margin-top:16px">A proposed journey from your first enquiry to your next opportunity.</p>
+        <p class="lead" style="margin-top:16px">A simple journey from your first enquiry to your next opportunity.</p>
         <div class="button-row" style="margin-top:26px"><Button href="#register">Start with Step 1</Button><a class="text-link" href="/how-it-works/">See the details <Icon name="arrow" size={18}/></a></div>
         <div class="frame"><img src="/images/placement.webp" alt="A recruiter discussing a CV with a candidate" width="960" height="640" loading="lazy" decoding="async"/></div>
       </div>

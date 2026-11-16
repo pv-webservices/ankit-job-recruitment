@@ -1,5 +1,16 @@
 # Deployment and launch handoff
 
+## Current production setup (November 2026)
+
+The site is live at **https://ankitjobs.in/** on **Vercel**; DNS is at Hostinger. Production builds
+default to that origin (`astro.config.mjs`), and `vercel.json` holds redirects, trailing-slash and
+header/cache rules. See the [README](../README.md#deployment-vercel) and the
+[Search Console guide](GOOGLE-SEARCH-CONSOLE.md) for the current process and checklist.
+The forms are live (Google Apps Script → Sheets/Drive, see [FORM-INTEGRATION.md](FORM-INTEGRATION.md)).
+
+The sections below are the original pre-launch handoff notes. Where they say no domain is set,
+that forms are unavailable, or describe `_headers`/`.htaccess`, they apply only to non-Vercel hosts or are superseded.
+
 ## Release gates
 
 This is a completed local website implementation with explicit release blockers, **not an approved production launch**. Before publication:

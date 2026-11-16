@@ -1,6 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
+import { business } from '../data/site';
+const helpfulLinks = [
+  ['Current Openings', '/current-openings/'],
+  ['Candidate Zone', '/candidate-zone/'],
+  ['Recruiter Zone', '/recruiter-zone/'],
+  ['Our Services', '/our-services/'],
+  ['How It Works', '/how-it-works/'],
+  ['FAQs', '/faq/'],
+];
 ---
 <Layout title="Page Not Found" description="This page could not be found. Return to Ankit Jobs & Staffing India or contact the team for recruitment and staffing enquiries." noindex>
   <section class="section error-page pattern-dots">
@@ -9,6 +18,13 @@ import Button from '../components/Button.astro';
       <h1>Let’s Get You Back on Track.</h1>
       <p class="lead">The page you are looking for may have moved or is no longer available. There’s still a next step.</p>
       <div class="button-row stack-sm"><Button href="/">Back to Home</Button><Button href="/contact-us/" variant="outline">Contact Us</Button></div>
+      <nav class="error-links" aria-labelledby="error-links-title">
+        <h2 id="error-links-title" class="error-links-title">Popular pages</h2>
+        <ul class="chip-row">
+          {helpfulLinks.map(([label, href]) => <li><a class="chip" href={href}>{label}</a></li>)}
+        </ul>
+      </nav>
+      <p class="error-contact">Need help now? <a href={business.tel}>Call <span class="num">{business.phone}</span></a> or <a href={business.whatsapp} target="_blank" rel="noopener noreferrer">chat on WhatsApp</a>.</p>
     </div>
   </section>
 </Layout>

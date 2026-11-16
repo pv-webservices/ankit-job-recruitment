@@ -83,6 +83,9 @@ let browser;
 try {
   browser = await chromium.launch({ channel: "chrome", headless: true });
   const context = await browser.newContext({ reducedMotion: "reduce" });
+  // Safety: never let a test reach the live Google Apps Script form endpoint
+  // (it writes to the production Google Sheet / Drive).
+  await context.route(/^https:\/\/script\.(google|googleusercontent)\.com\//, (route) => route.abort());
   const page = await context.newPage();
   page.on("pageerror", (error) => report.browserErrors.push(error.message));
   page.on("console", message => {

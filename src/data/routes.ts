@@ -9,4 +9,7 @@ export const publicRoutes = [
   "/how-it-works/",
   "/contact-us/",
   "/faq/",
+  "/privacy-policy/",
+  "/terms-and-conditions/",
+  "/disclaimer/",
 ];

@@ -1,6 +1,6 @@
 # Ankit Jobs & Staffing India — design system (v2 redesign)
 
-The navy, white and gold identity comes from the original logo (`website-logo-ankit-recruitment.jpeg`), which is never redrawn. The red accent comes from the logo's stars. The v2 redesign keeps all business content, form logic and pages, and replaces the visual system.
+The navy, white and gold identity comes from the original logo (`assets-src/brand/ankit-jobs-logo-source.jpeg`), which is never redrawn. The red accent comes from the logo's stars. The v2 redesign keeps all business content, form logic and pages, and replaces the visual system.
 
 ## Files
 

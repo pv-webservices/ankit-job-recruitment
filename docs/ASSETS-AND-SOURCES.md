@@ -2,7 +2,7 @@
 
 ## Original client assets
 
-- `website-logo-ankit-recruitment.jpeg`: supplied original logo; retained untouched in the project root. WebP logo, PNG favicon and JPEG social image are proportional web optimizations of this artwork, not redesigns.
+- `assets-src/brand/ankit-jobs-logo-source.jpeg`: supplied original logo (moved from the project root, unchanged). Favicons are regenerated from it with `node scripts/images/favicons.mjs`. WebP logo, PNG favicon and JPEG social image are proportional web optimizations of this artwork, not redesigns.
 - `C:/Users/hp/Downloads/Ankit Jobs Recruitment Homepage.png`: approved layout reference. Used for visual analysis and comparison; not shipped as a screenshot masquerading as a webpage.
 - The pasted master development prompt is the project specification. Business contacts, service descriptions and location names come from that supplied brief.
 

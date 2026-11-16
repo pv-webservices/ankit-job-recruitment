@@ -92,12 +92,12 @@ export const steps = [
   {
     title: "Register Your Details",
     icon: "clipboard",
-    text: "Review the candidate registration form and the information requested. Online submission will be available after secure processing is enabled.",
+    text: "Fill in the free online form in the Candidate Zone with your personal, contact, education and location details. You can attach your resume.",
   },
   {
     title: "Profile Screening",
     icon: "search",
-    text: "The proposed next step is a review of qualifications and the details relevant to an enquiry.",
+    text: "The team reviews your qualifications and details and contacts you about suitable roles.",
   },
   {
     title: "Match with Opportunities",
@@ -118,7 +118,7 @@ export const steps = [
 export const faqs = [
   {
     q: "How can I register as a job seeker?",
-    a: "Visit Candidate Registration to review the form. Online submission is currently unavailable while secure processing and privacy terms are being finalized. You can call the team for a general enquiry in the meantime.",
+    a: "Go to the Candidate Zone, fill in the free registration form and tap Submit. You will see a reference number once your details are received. You can also call or WhatsApp the team for help.",
   },
   {
     q: "What details are required for registration?",

@@ -12,8 +12,13 @@
     "check": "astro check",
     "audit:site": "node scripts/audit-build.mjs",
     "test:browser": "node scripts/browser-qa.mjs",
+    "test:site": "node scripts/site-qa.mjs",
     "test:cross-browser": "node scripts/cross-browser-qa.mjs",
     "test:seo": "node scripts/check-seo.mjs",
+    "audit": "npm run build && node scripts/audit-build.mjs && node scripts/seo-audit.mjs",
+    "audit:seo": "node scripts/seo-audit.mjs",
+    "images:posters": "node scripts/images/job-posters.mjs",
+    "images:favicons": "node scripts/images/favicons.mjs",
     "images:generate": "node --env-file=.env scripts/images/generate.mjs",
     "images:optimize": "node scripts/images/generate.mjs --optimize-only"
   },

@@ -6,7 +6,7 @@ import Icon from '../components/Icon.astro';
 import CareerCTA from '../components/CareerCTA.astro';
 import { business, services } from '../data/site';
 ---
-<Layout title="Our Services — Recruitment, Staffing & Training" description="Manpower recruitment, overseas placement, staffing services and corporate training from Ankit Jobs & Staffing India.">
+<Layout title="Our Services — Staffing & Training" description="Manpower recruitment, overseas placement, staffing services and corporate training from Ankit Jobs & Staffing India.">
   <PageHero title="Workforce Solutions <em>Built Around You.</em>" crumb="Our Services" eyebrow="Our services" text="From a single key hire to bulk manpower, overseas placement and team training — one trusted partner for your workforce needs." image="staffing" imageAlt="Representative staffing professionals at work">
     <div class="button-row stack-sm"><Button href="/recruiter-zone/">Share Your Requirement</Button><Button href={business.tel} variant="ghost-light" leadingIcon="phone" icon={false}>Call <span class="num">{business.phone}</span></Button></div>
   </PageHero>
@@ -20,7 +20,7 @@ import { business, services } from '../data/site';
             <span class:list={['icon-badge', { navy: i % 2 === 1 }]}><Icon name={s.icon} size={26}/></span>
             <h3>{s.title}</h3>
             <p>{s.text}</p>
-            <a class="text-link" href={`#${s.slug}`}>Learn more <Icon name="arrow" size={16}/></a>
+            <a class="text-link" href={`#${s.slug}`}>Learn more<span class="sr-only"> about {s.title}</span> <Icon name="arrow" size={16}/></a>
           </article>
         ))}
       </div>

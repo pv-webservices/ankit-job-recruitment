@@ -23,15 +23,15 @@ if (generated) {
         .toFile("public/images/hero-800.webp");
   }
 }
-await sharp("website-logo-ankit-recruitment.jpeg")
+await sharp("assets-src/brand/ankit-jobs-logo-source.jpeg")
   .resize({ width: 220 })
   .webp({ quality: 91 })
   .toFile("public/images/logo.webp");
-await sharp("website-logo-ankit-recruitment.jpeg")
+await sharp("assets-src/brand/ankit-jobs-logo-source.jpeg")
   .resize({ width: 64 })
   .png()
   .toFile("public/favicon.png");
-await sharp("website-logo-ankit-recruitment.jpeg")
+await sharp("assets-src/brand/ankit-jobs-logo-source.jpeg")
   .resize(630, 630, { fit: "contain", background: "#03142e" })
   .extend({ left: 285, right: 285, background: "#03142e" })
   .jpeg({ quality: 88 })

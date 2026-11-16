@@ -5,29 +5,40 @@ import '@fontsource-variable/archivo/wdth.css';
 import '@fontsource-variable/ibm-plex-sans/wght.css';
 import '../styles/global.css';
 import { business, socials } from '../data/site';
-interface Props { title: string; description: string; noindex?: boolean; preloadImage?: { href: string; srcset?: string; sizes?: string }; }
-const { title, description, noindex = false, preloadImage } = Astro.props;
-const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
-const schema = { '@context': 'https://schema.org', '@type': 'EmploymentAgency', name: business.name, telephone: '+918348623389', email: business.email, areaServed: ['Kolkata', 'Vizag', 'Odisha'], sameAs: socials.map((s) => s.href), ...(Astro.site ? { url: Astro.site.href, logo: new URL('/images/logo-badge-2x.webp', Astro.site).href } : {}) };
+interface Props { title: string; description: string; noindex?: boolean; brandFirst?: boolean; preloadImage?: { href: string; srcset?: string; sizes?: string }; }
+const { title, description, noindex = false, brandFirst = false, preloadImage } = Astro.props;
+const indexable = !noindex && Boolean(Astro.site);
+const canonical = indexable ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const fullTitle = brandFirst ? `${business.name} | ${title}` : `${title} | ${business.name}`;
+const socialImage = Astro.site ? new URL('/images/social-share.jpg', Astro.site).href : '/images/social-share.jpg';
+const orgId = Astro.site ? new URL('/#organization', Astro.site).href : undefined;
+const organization = { '@type': 'EmploymentAgency', ...(orgId ? { '@id': orgId } : {}), name: business.name, telephone: '+918348623389', email: business.email, areaServed: ['Kolkata', 'Vizag', 'Odisha'], sameAs: socials.map((s) => s.href.split('?')[0]), ...(Astro.site ? { url: Astro.site.href, logo: new URL('/images/logo-badge-2x.webp', Astro.site).href, image: socialImage } : {}) };
+const website = Astro.site ? { '@type': 'WebSite', '@id': new URL('/#website', Astro.site).href, url: Astro.site.href, name: business.name, inLanguage: 'en-IN', publisher: { '@id': orgId } } : undefined;
+const schema = { '@context': 'https://schema.org', '@graph': [organization, ...(website ? [website] : [])] };
 ---
 <!doctype html>
 <html lang="en-IN">
   <head>
     <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-    <title>{title} | Ankit Jobs &amp; Staffing India</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description}/><meta name="theme-color" content="#03142e"/>
     <meta name="robots" content={noindex || !Astro.site ? 'noindex, follow' : 'index, follow'}/>
     {canonical && <link rel="canonical" href={canonical}/>}
-    <link rel="icon" type="image/png" href="/favicon.png"/>
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+    <link rel="icon" href="/favicon.ico" sizes="48x48"/>
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+    <link rel="manifest" href="/site.webmanifest"/>
     {preloadImage && <link rel="preload" as="image" href={preloadImage.href} imagesrcset={preloadImage.srcset} imagesizes={preloadImage.sizes} fetchpriority="high"/>}
     <noscript><link rel="stylesheet" href="/no-script.css"/></noscript>
     <meta property="og:type" content="website"/><meta property="og:locale" content="en_IN"/>
-    <meta property="og:title" content={`${title} | Ankit Jobs & Staffing India`}/><meta property="og:description" content={description}/>
+    <meta property="og:title" content={fullTitle}/><meta property="og:description" content={description}/>
     <meta property="og:site_name" content={business.name}/>{canonical && <meta property="og:url" content={canonical}/>}
-    <meta property="og:image" content={Astro.site ? new URL('/images/social-share.jpg', Astro.site).href : '/images/social-share.jpg'}/>
+    <meta property="og:image" content={socialImage}/><meta property="og:image:type" content="image/jpeg"/>
+    <meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/>
     <meta property="og:image:alt" content="Ankit Jobs & Staffing India — Recruitment ! Staffing"/>
-    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:card" content="summary_large_image"/><meta name="twitter:site" content="@AnkitJobs99"/>
+    <meta name="twitter:title" content={fullTitle}/><meta name="twitter:description" content={description}/>
+    <meta name="twitter:image" content={socialImage}/><meta name="twitter:image:alt" content="Ankit Jobs & Staffing India — Recruitment ! Staffing"/>
     <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}/>
   </head>
   <body><Header/><main id="main" tabindex="-1"><slot/></main><Footer/><script>import '../scripts/site';</script></body>

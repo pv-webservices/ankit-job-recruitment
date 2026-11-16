@@ -2,7 +2,16 @@
 import Icon from './Icon.astro';
 interface Props { title: string; text: string; eyebrow?: string; image?: string; imageAlt?: string; crumb?: string; }
 const { title, text, eyebrow = 'Ankit Jobs & Staffing India', image, imageAlt = 'Representative recruitment and workforce professionals', crumb } = Astro.props;
+const breadcrumbSchema = Astro.site && crumb ? {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: Astro.site.href },
+    { '@type': 'ListItem', position: 2, name: crumb, item: new URL(Astro.url.pathname, Astro.site).href },
+  ],
+} : undefined;
 ---
+{breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c')}/>}
 <section class="page-hero">
   <div class:list={['container page-hero-inner', { 'no-media': !image }]}>
     <div class="hero-anim on-dark">

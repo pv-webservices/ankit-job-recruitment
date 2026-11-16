@@ -61,35 +61,6 @@
   outline: 3px solid var(--gold-400);
   outline-offset: -3px;
 }
-.job-tag {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  padding: 6px 12px;
-  border-radius: var(--r-pill);
-  background: var(--red-500);
-  color: var(--white);
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  box-shadow: 0 6px 14px rgb(200 16 46 / 0.35);
-}
-.job-zoom {
-  position: absolute;
-  right: 14px;
-  bottom: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 12px;
-  border-radius: var(--r-pill);
-  background: rgb(3 20 46 / 0.82);
-  color: var(--white);
-  font-size: var(--fs-xs);
-  font-weight: 600;
-  backdrop-filter: blur(4px);
-}
 .job-body {
   display: flex;
   flex-direction: column;

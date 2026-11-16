@@ -336,3 +336,30 @@
   margin: 0;
   color: #5b4300 !important;
 }
+
+/* 404: helpful links + standalone contact */
+.error-links {
+  margin-top: 40px;
+}
+.error-links-title {
+  margin: 0 0 14px;
+  font-size: var(--fs-sm, 1rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.error-links .chip-row {
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.error-links .chip {
+  min-height: 44px;
+  text-decoration: none;
+}
+.error-contact {
+  margin-top: 28px;
+}
+.error-contact a {
+  font-weight: 700;
+}
